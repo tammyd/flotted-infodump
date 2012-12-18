@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="TagdataMusic" table="tagdata_music">
+    <id name="tagid" type="integer" column="tagid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="linkid" type="integer" column="linkid" nullable="true"/>
+    <field name="linkdate" type="datetime" column="linkdate" nullable="true"/>
+    <field name="tagname" type="text" column="tagname" nullable="true"/>
+  </entity>
+</doctrine-mapping>

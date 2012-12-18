@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="CommentlengthMusic" table="commentlength_music">
+    <id name="commentid" type="integer" column="commentid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="length" type="integer" column="length" nullable="true"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,32 @@
+<?php
+
+namespace Mefi\InfoDumpBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Mefi\InfoDumpBundle\Entity\PosttitlesMusic
+ *
+ * @ORM\Table(name="posttitles_music")
+ * @ORM\Entity
+ */
+class PosttitlesMusic
+{
+    /**
+     * @var integer $postid
+     *
+     * @ORM\Column(name="postid", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $postid;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="text", nullable=true)
+     */
+    private $title;
+
+
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Favoritesdata" table="favoritesdata">
+    <id name="favoritesdataId" type="integer" column="favoritesdata_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="faveid" type="integer" column="faveid" nullable="true"/>
+    <field name="faver" type="integer" column="faver" nullable="true"/>
+    <field name="favee" type="integer" column="favee" nullable="true"/>
+    <field name="type" type="integer" column="type" nullable="true"/>
+    <field name="target" type="integer" column="target" nullable="true"/>
+    <field name="parent" type="integer" column="parent" nullable="true"/>
+    <field name="datestamp" type="datetime" column="datestamp" nullable="true"/>
+  </entity>
+</doctrine-mapping>

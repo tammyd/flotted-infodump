@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Contactdata" table="contactdata">
+    <id name="contactId" type="integer" column="contact_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="contacter" type="integer" column="contacter" nullable="true"/>
+    <field name="contactee" type="integer" column="contactee" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="true"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,74 @@
+<?php
+
+namespace Mefi\InfoDumpBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Mefi\InfoDumpBundle\Entity\PostdataMusic
+ *
+ * @ORM\Table(name="postdata_music")
+ * @ORM\Entity
+ */
+class PostdataMusic
+{
+    /**
+     * @var integer $postid
+     *
+     * @ORM\Column(name="postid", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $postid;
+
+    /**
+     * @var integer $userid
+     *
+     * @ORM\Column(name="userid", type="integer", nullable=true)
+     */
+    private $userid;
+
+    /**
+     * @var \DateTime $datestamp
+     *
+     * @ORM\Column(name="datestamp", type="datetime", nullable=true)
+     */
+    private $datestamp;
+
+    /**
+     * @var integer $category
+     *
+     * @ORM\Column(name="category", type="integer", nullable=true)
+     */
+    private $category;
+
+    /**
+     * @var integer $comments
+     *
+     * @ORM\Column(name="comments", type="integer", nullable=true)
+     */
+    private $comments;
+
+    /**
+     * @var integer $favorites
+     *
+     * @ORM\Column(name="favorites", type="integer", nullable=true)
+     */
+    private $favorites;
+
+    /**
+     * @var boolean $deleted
+     *
+     * @ORM\Column(name="deleted", type="boolean", nullable=true)
+     */
+    private $deleted;
+
+    /**
+     * @var string $reason
+     *
+     * @ORM\Column(name="reason", type="text", nullable=true)
+     */
+    private $reason;
+
+
+}

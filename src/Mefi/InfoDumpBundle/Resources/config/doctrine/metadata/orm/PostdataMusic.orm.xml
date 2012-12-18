@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="PostdataMusic" table="postdata_music">
+    <id name="postid" type="integer" column="postid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="userid" type="integer" column="userid" nullable="true"/>
+    <field name="datestamp" type="datetime" column="datestamp" nullable="true"/>
+    <field name="category" type="integer" column="category" nullable="true"/>
+    <field name="comments" type="integer" column="comments" nullable="true"/>
+    <field name="favorites" type="integer" column="favorites" nullable="true"/>
+    <field name="deleted" type="boolean" column="deleted" nullable="true"/>
+    <field name="reason" type="text" column="reason" nullable="true"/>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="CommentdataMeta" table="commentdata_meta">
+    <id name="commentid" type="integer" column="commentid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="postid" type="integer" column="postid" nullable="true"/>
+    <field name="userid" type="integer" column="userid" nullable="true"/>
+    <field name="datestamp" type="datetime" column="datestamp" nullable="true"/>
+    <field name="faves" type="integer" column="faves" nullable="true"/>
+    <field name="bestanswer" type="boolean" column="bestanswer" nullable="true"/>
+  </entity>
+</doctrine-mapping>
