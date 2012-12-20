@@ -1,0 +1,36 @@
+{# Basic page template with header & footer. @TODO: Analytics #}
+{% extends 'MefiInfoDumpBundle::base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets  output="generated/page.css"
+  'bundles/mefiinfodump/less/header.less' filter='less' filter='cssrewrite'
+  'bundles/mefiinfodump/less/footer.less' filter='less' filter='cssrewrite'
+  'bundles/mefiinfodump/css/sticky-footer.css' filter='cssrewrite'
+  %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block bodycontent %}
+  {% block header %}
+    {%  render "MefiInfoDumpBundle:Common:header" with {} %}
+  {% endblock %}
+
+  {% block content %}
+  <div class="container-fluid">
+    <div class='lead'>Content goes here</div>
+  </div>
+  {% endblock %}
+
+{% endblock %}
+
+{% block footercontent %}
+
+  {% render "MefiInfoDumpBundle:Common:footer" %}
+
+{% endblock %}
+
+
+
+

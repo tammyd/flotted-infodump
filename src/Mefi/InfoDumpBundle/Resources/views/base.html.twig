@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% block htmltag %}
+<html>
+{% endblock %}
+<head>
+  {% block headcontent  %}
+
+    {% block stylesheets %}
+      {% stylesheets  output="generated/infodump.css"
+      'bundles/mefiinfodump/bootstrap/less/bootstrap.less' filter='less' filter='cssrewrite'
+      'bundles/mefiinfodump/bootstrap/less/responsive.less' filter='less' filter='cssrewrite'
+      %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+      {% endstylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+      {%  javascripts output="generated/infodump.js"
+
+      %}
+      <script type="text/javascript" src="{{ asset_url }}"></script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+      {% endjavascripts %}
+    {% endblock %}
+  {% endblock %}
+
+
+</head>
+<body>
+
+{% block body %}
+  <div id="wrap">
+      {% block bodycontent %}
+        BodyContent w/in wrqp
+      {% endblock %}
+  </div>
+  <div id="footer">
+    {%  block footercontent %}
+      Sticky Footer
+    {%  endblock %}
+  </div>
+
+
+  {% block footer_javascripts %}
+    {#Note that jquery must come before twitter bootstrap js, and twitter bootstrap order is important.#}
+    {% javascripts output="generated/bootstrap.js"
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-transition.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-alert.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-modal.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-dropdown.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-scrollspy.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-tab.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-tooltip.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-popover.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-button.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-collapse.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-carousel.js'
+    'bundles/mefiinfodump/bootstrap/js/bootstrap-typeahead.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+  {% endblock  %}
+{% endblock %}
+</body>
+</html>

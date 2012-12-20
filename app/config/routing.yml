@@ -1,4 +1,4 @@
-mefi_info_dump:
+mefi_infodump:
     resource: "@MefiInfoDumpBundle/Resources/config/routing.yml"
     prefix:   /
 
