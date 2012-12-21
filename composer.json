@@ -20,6 +20,22 @@
                     "type": "zip"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "master",
+                "name": "flot/flot",
+                "source": {
+                    "url": "https://github.com/flot/flot.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "dist": {
+                    "url": "https://github.com/flot/flot/zipball/master",
+                    "type": "zip"
+                }
+            }
         }
     ],
     "require": {
@@ -37,7 +53,9 @@
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
         "kriswallsmith/assetic": "1.1.*@dev",
-        "twitter/bootstrap": "dev-master"
+        "friendsofsymfony/jsrouting-bundle": "1.1.*@dev",
+        "twitter/bootstrap": "dev-master",
+        "flot/flot": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

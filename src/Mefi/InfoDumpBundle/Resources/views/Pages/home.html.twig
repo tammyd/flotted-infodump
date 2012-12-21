@@ -1,9 +1,25 @@
 {% extends 'MefiInfoDumpBundle::page.html.twig' %}
 
-{% block content %}
-  <div class="container-fluid">
-    <div class='lead'>Hone Page Content</div>
+{% block page_javascripts %}
 
-    {% render "MefiInfoDumpBundle:UserInfo:test" %}
+  {% javascripts output="generated/home.js"
+  'bundles/mefiinfodump/js/leftnav.js'
+  'bundles/mefiinfodump/js/test.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3"> <!-- sidebar -->
+        {% render "MefiInfoDumpBundle:Common:leftnav" %}
+      </div><!--/span-->
+      <div class="span9"> <!--Body content-->
+        {% render "MefiInfoDumpBundle:Home:content" %}
+      </div>
+    </div>
   </div>
 {% endblock %}

@@ -4,41 +4,33 @@ namespace Mefi\InfoDumpBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\DBAL\Connection;
+use Symfony\Component\HttpFoundation\Response;
+
 
 
 class UserInfoController extends Controller
 {
-    public function testAction()
+    public function testDataAction()
     {
-//        $cgg = null;
-//        $cgg = $this->getDoctrine()
-//            ->getRepository('MefiInfoDumpBundle:Usernames')
-//            ->findOneBy(array('name' => 'cgg'));
-//
-//        var_dump($cgg); die();
 
-//        if (!$cgg) {
-//            throw $this->createNotFoundException(
-//                'No user found for cgg'
-//            );
-//        }
 
         /** @var $conn Connection */
         $conn = $this->getDoctrine()
             ->getManager()
             ->getConnection();
-        echo get_class($conn);
         $sql = "SELECT COUNT( * ) AS signups, YEAR( joindate ) AS YEAR, MONTH( joindate ) AS MONTH FROM
                 usernames  GROUP BY YEAR, MONTH ORDER BY YEAR ASC , MONTH ASC";
-        var_dump($conn->fetchAll($sql));
+        $all = $conn->fetchAll($sql);
 
+        //return $this->render('MefiInfoDumpBundle:UserInfo:test.html.twig', array('test'=>'This is a test'));
+        $response = new Response(json_encode(array('d1' => array(1,2,3,4))));
+        $response->headers->set('Content-Type', 'application/json');
 
-//        $query = $em->createQuery(
-//            'SELECT COUNT(*), year(joindate) as year, month() FROM MefiInfoDumpBundle:Usernames');
-//
-//        $products = $query->getResult();
-//        var_dump($products);
+        return $response;
+    }
 
+    public function testContentAction()
+    {
         return $this->render('MefiInfoDumpBundle:UserInfo:test.html.twig');
     }
 }

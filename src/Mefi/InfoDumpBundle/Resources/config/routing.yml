@@ -1,3 +1,15 @@
 home:
     pattern:  /
     defaults: { _controller: MefiInfoDumpBundle:Home:index }
+
+home_test_content:
+    pattern: /_home/test/content
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:testContent }
+    options:
+      expose: true
+
+home_test_data:
+    pattern: /_home/test/data
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:testData }
+    options:
+      expose: true

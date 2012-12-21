@@ -16,4 +16,9 @@ class CommonController extends Controller
     {
         return $this->render('MefiInfoDumpBundle:Common:footer.html.twig');
     }
+
+    public function leftNavAction()
+    {
+        return $this->render('MefiInfoDumpBundle:Common:leftnav.html.twig');
+    }
 }
