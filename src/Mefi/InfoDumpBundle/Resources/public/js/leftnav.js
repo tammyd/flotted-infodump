@@ -16,6 +16,23 @@ $(document).ready(function()
     };
 
 
+    var $loader = $('#spinner'), timer;
+    $loader.spin("large");
+    $(this).ajaxStart(function() {
+        console.log('Ajax Start...');
+        timer && clearTimeout(timer);
+        timer = setTimeout(function()
+        {
+            $loader.show();
+        },500);
+    });
+
+    $(this).ajaxStop(function() {
+        console.log('Ajax Stop...');
+        clearTimeout(timer);
+        $loader.hide();
+    });
+
     $('ul.report-menu > li > a').click(function() {
         hidePage();
         clearPage();

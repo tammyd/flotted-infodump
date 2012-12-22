@@ -1,5 +1,14 @@
 {% extends 'MefiInfoDumpBundle::page.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets  output="generated/home.css"
+  'bundles/mefiinfodump/less/home.less' filter='less' filter='cssrewrite'
+  %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block page_javascripts %}
 
   {% javascripts output="generated/home.js"
@@ -7,6 +16,8 @@
   'bundles/mefiinfodump/js/home.js'
   'bundles/mefiinfodump/js/leftnav.js'
   'bundles/mefiinfodump/js/user_charts.js'
+  'bundles/mefiinfodump/js/spin.js'
+  'bundles/mefiinfodump/js/jquery.spin.js'
   %}
   <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
