@@ -2,6 +2,12 @@ home:
     pattern:  /
     defaults: { _controller: MefiInfoDumpBundle:Home:index }
 
+home_content:
+  pattern: /home/content
+  defaults: {_controller: MefiInfoDumpBundle:Home:content }
+  options:
+    expose: true
+
 home_test_content:
     pattern: /_home/test/content
     defaults: { _controller: MefiInfoDumpBundle:UserInfo:testContent }
@@ -14,8 +20,14 @@ home_test_data:
     options:
       expose: true
 
-home_content:
-  pattern: /home/content
-  defaults: {_controller: MefiInfoDumpBundle:Home:content }
-  options:
-    expose: true
+signupsByDate_content:
+    pattern: /_home/signupsByDate/content
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByDateContent }
+    options:
+      expose: true
+
+signupsByDate_data:
+    pattern: /_home/signupsByDate/data
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByDateData}
+    options:
+      expose: true

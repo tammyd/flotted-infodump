@@ -43,24 +43,17 @@ $(document).ready(function()
             $.ajax({
                 url: dataUri
             }).done(function( data) {
-                console.log(dataUri + ' is done')
                 if (ftn !== undefined) {
-                    console.log('calling '+ ftn + ' with ' + data)
                     window[ftn](data);
-                    console.log('filling content with '+contentUri)
                     $('#content').load(contentUri, showPage);
-                    console.log('=~=~=~=~=~=');
                 }
              });
         } else {
             //no data, just call ftn and load content
-            console.log('filling content with '+contentUri)
             if (ftn !== undefined) {
-                console.log('calling '+ ftn + ' without data ')
                 window[ftn]();
             }
             $('#content').load(contentUri, showPage);
-            console.log('=~=~=~=~=~=');
         }
 
 
