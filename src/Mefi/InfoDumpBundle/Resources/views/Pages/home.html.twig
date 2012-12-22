@@ -3,6 +3,8 @@
 {% block page_javascripts %}
 
   {% javascripts output="generated/home.js"
+  'bundles/mefiinfodump/js/date.js'
+  'bundles/mefiinfodump/js/home.js'
   'bundles/mefiinfodump/js/leftnav.js'
   'bundles/mefiinfodump/js/test.js'
   %}
@@ -18,7 +20,7 @@
         {% render "MefiInfoDumpBundle:Common:leftnav" %}
       </div><!--/span-->
       <div class="span9"> <!--Body content-->
-        {% render "MefiInfoDumpBundle:Home:content" %}
+        {% render "MefiInfoDumpBundle:Home:template" %}
       </div>
     </div>
   </div>

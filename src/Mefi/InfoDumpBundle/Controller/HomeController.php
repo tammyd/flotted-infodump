@@ -13,8 +13,13 @@ class HomeController extends Controller
         return $this->render('MefiInfoDumpBundle:Pages:home.html.twig');
     }
 
+    public function templateAction()
+    {
+        return $this->render('MefiInfoDumpBundle:Home:template.html.twig');
+    }
+
     public function contentAction()
     {
-        return $this->render('MefiInfoDumpBundle:Home:content.html.twig');
+        return $this->render('MefiInfoDumpBundle:Home:landing.html.twig');
     }
 }

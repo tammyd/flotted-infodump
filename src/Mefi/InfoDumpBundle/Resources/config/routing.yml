@@ -13,3 +13,9 @@ home_test_data:
     defaults: { _controller: MefiInfoDumpBundle:UserInfo:testData }
     options:
       expose: true
+
+home_content:
+  pattern: /home/content
+  defaults: {_controller: MefiInfoDumpBundle:Home:content }
+  options:
+    expose: true
