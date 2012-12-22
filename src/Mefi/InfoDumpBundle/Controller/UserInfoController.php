@@ -28,11 +28,16 @@ class UserInfoController extends Controller
     public function signupsByDateDataAction() {
 
         /** @var $conn Connection */
-        $conn = $this->getDoctrine()
-            ->getManager()
-            ->getConnection();
-        $sql = "select count(*) as count, date(joindate) as date from usernames group by date order by date asc";
-        $all = $conn->fetchAll($sql);
+//        $conn = $this->getDoctrine()
+//            ->getManager()
+//            ->getConnection();
+//        $sql = "select count(*) as count, date(joindate) as date from usernames group by date order by date asc";
+//        $all = $conn->fetchAll($sql);
+
+        $em = $this->getDoctrine()->getManager();
+        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByDate();
+
+
         $response = new Response(json_encode($all));
         $response->headers->set('Content-Type', 'application/json');
 
