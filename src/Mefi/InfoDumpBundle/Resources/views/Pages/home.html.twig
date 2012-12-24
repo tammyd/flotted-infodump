@@ -12,12 +12,7 @@
 {% block page_javascripts %}
 
   {% javascripts output="generated/home.js"
-  'bundles/mefiinfodump/js/date.js'
-  'bundles/mefiinfodump/js/home.js'
-  'bundles/mefiinfodump/js/leftnav.js'
-  'bundles/mefiinfodump/js/user_charts.js'
-  'bundles/mefiinfodump/js/spin.js'
-  'bundles/mefiinfodump/js/jquery.spin.js'
+  'bundles/mefiinfodump/js/*.js'
   %}
   <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}

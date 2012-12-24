@@ -1,3 +1,4 @@
+
 var test = function () {
     var d1 = [];
     for (var i = 0; i < 14; i += 0.5)
@@ -19,38 +20,8 @@ var signupsByDate = function(data) {
 
 var signupsByMonth= function(jsonData) {
 
-    function showTooltip(x, y, contents) {
-        $('<div id="tooltip">' + contents + '</div>').css( {
-            position: 'absolute',
-            display: 'none',
-            top: y + 5,
-            left: x + 5,
-            border: '1px solid #fdd',
-            padding: '2px',
-            'background-color': '#fee',
-            opacity: 0.80
-        }).appendTo("body").fadeIn(200);
-    }
-
-    function getMonth(i) {
-        var months = {
-            1:'Jan', 2:'Feb', 3:'Mar', 4:'Apr', 5:'May', 6:'Jun',
-            7:'July', 8:'Oct', 9:'Sept', 10:'Oct', 11:'Nov', 12:'Dec'
-        }
-        return months[i];
-    }
-
-
-    var graph = $("#graph");
+    var graph = graphHelpers.graph();
     var plotData = [];
-    $.each(jsonData, function(year, monthData) {
-        var obj = {'label':year, data:[]}
-        $.each(monthData, function(month, count) {
-            //console.log(year + ":" + month + ":" + count); //this will print the header contents
-            obj.data.push([month, count])
-        });
-        plotData.push(obj)
-    });
 
     var options = {
         xaxis: {
@@ -62,46 +33,63 @@ var signupsByMonth= function(jsonData) {
         },
         grid: { hoverable: true, clickable: true }
     }
-    for (i=1;i<=12;i++) {
-        options.xaxis.ticks.push([i,getMonth(i)]);
-    }
 
+    var doDisplay = function() {
+        //Using the jsonData, build up the plot data
+        $.each(jsonData, function(year, monthData) {
+            var obj = {'label':year, data:[]}
+            $.each(monthData, function(month, count) {
+                //console.log(year + ":" + month + ":" + count); //this will print the header contents
+                obj.data.push([month, count])
+            });
+            plotData.push(obj)
+        });
 
-    var plot = $.plot(graph, plotData, options);
-
-    graph.bind("plotclick", function (event, pos, item) {
-        if (item) {
-            plot.unhighlight();
-            plot.highlight(item.series, item.datapoint);
-
+        //auto generate the plot ticks
+        for (i=1;i<=12;i++) {
+            options.xaxis.ticks.push([i,graphHelpers.getMonthAbbr(i)]);
         }
-    });
 
-    var previousPoint = null;
-    graph.bind("plothover", function (event, pos, item) {
-        $("#x").text(pos.x);
-        $("#y").text(pos.y);
 
-        if (item) {
-            if (previousPoint != item.dataIndex) {
-                previousPoint = item.dataIndex;
+        //plot the data
+        var plot = $.plot(graph, plotData, options);
+        var previousPoint = null;
 
-                $("#tooltip").remove();
-                var x = item.datapoint[0].toFixed(2),
-                    y = item.datapoint[1].toFixed(2);
+        //bind the plot to click and over events
+        graph.bind("plotclick", function (event, pos, item) {
+            if (item) {
+                plot.unhighlight();
+                plot.highlight(item.series, item.datapoint);
 
-                console.log(x)
-                var tt = getMonth(parseInt(x)) + " " + item.series.label + ": " + parseInt(y) + " signups";
-                showTooltip(item.pageX, item.pageY,tt );
             }
-        }
-        else {
-            $("#tooltip").remove();
-            previousPoint = null;
-        }
-    });
+        });
 
 
+        graph.bind("plothover", function (event, pos, item) {
+            $("#x").text(pos.x);
+            $("#y").text(pos.y);
+
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2),
+                        y = item.datapoint[1].toFixed(2);
+
+                    console.log(x)
+                    var tt = graphHelpers.getMonthAbbr(parseInt(x)) + " " + item.series.label + ": " + parseInt(y) + " signups";
+                    graphHelpers.showTooltip(item.pageX, item.pageY,tt );
+                }
+            }
+            else {
+                $("#tooltip").remove();
+                previousPoint = null;
+            }
+        });
+    };
+
+    doDisplay();
 
 }
 

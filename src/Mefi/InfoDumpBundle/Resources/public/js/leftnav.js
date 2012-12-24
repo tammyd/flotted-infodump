@@ -19,7 +19,6 @@ $(document).ready(function()
     var $loader = $('#spinner'), timer;
     $loader.spin("large");
     $(this).ajaxStart(function() {
-        console.log('Ajax Start...');
         timer && clearTimeout(timer);
         timer = setTimeout(function()
         {
@@ -28,7 +27,6 @@ $(document).ready(function()
     });
 
     $(this).ajaxStop(function() {
-        console.log('Ajax Stop...');
         clearTimeout(timer);
         $loader.hide();
     });
@@ -56,7 +54,6 @@ $(document).ready(function()
         var displayFtn = $(this).data('display');
 
         if (dataUri !== undefined) {
-            console.log('ajax: '+ dataUri)
             $.ajax({
                 url: dataUri
             }).done(function( data) {
