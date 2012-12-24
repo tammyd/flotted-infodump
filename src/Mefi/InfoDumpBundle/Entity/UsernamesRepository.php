@@ -9,7 +9,7 @@ class UsernamesRepository extends EntityRepository
     public function getCountSignupsByDate()
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = "select count(*) as count, date(joindate) as date from usernames group by date order by date asc limit 7";
+        $sql = "select count(*) as count, date(joindate) as date from usernames group by date order by date asc";
         return $conn->fetchAll($sql);
     }
 
@@ -18,13 +18,21 @@ class UsernamesRepository extends EntityRepository
         $conn = $this->getEntityManager()->getConnection();
         $sql = <<<SQL
 
-SELECT COUNT( * ) AS count, DATE_FORMAT( joindate,  '%b %Y' ) AS DATE
+SELECT COUNT( * ) AS count, month(joindate) as month, year(joindate) as year
 FROM usernames
-GROUP BY DATE_FORMAT( joindate,  '%Y %m' )
-ORDER BY DATE_FORMAT( joindate,  '%Y %m' ) ASC
+GROUP BY month,year
+ORDER BY year asc, month asc
 
 SQL;
 
         return $conn->fetchAll($sql);
     }
+
+    public function getCountSignupsByYear()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "select count(*) as count, year(joindate) as date from usernames group by date order by date asc";
+        return $conn->fetchAll($sql);
+    }
+
 }

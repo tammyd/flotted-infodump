@@ -53,22 +53,22 @@ $(document).ready(function()
             var contentUri = Routing.generate(contentRoute);
         }
 
-        var ftn = $(this).data('ftn');
+        var displayFtn = $(this).data('display');
 
         if (dataUri !== undefined) {
             console.log('ajax: '+ dataUri)
             $.ajax({
                 url: dataUri
             }).done(function( data) {
-                if (ftn !== undefined) {
-                    window[ftn](data);
+                if (displayFtn !== undefined) {
+                    window[displayFtn](data);
                     $('#content').load(contentUri, showPage);
                 }
              });
         } else {
             //no data, just call ftn and load content
-            if (ftn !== undefined) {
-                window[ftn]();
+            if (displayFtn !== undefined) {
+                window[displayFtn]();
             }
             $('#content').load(contentUri, showPage);
         }

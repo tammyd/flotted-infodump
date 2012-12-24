@@ -44,3 +44,15 @@ signupsByMonth_data:
     options:
       expose: true
 
+signupsByYear_content:
+    pattern: /_home/signupsByYear/content
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByYearContent }
+    options:
+      expose: true
+
+signupsByYear_data:
+    pattern: /_home/signupsByYear/data
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByYearData}
+    options:
+      expose: true
+
