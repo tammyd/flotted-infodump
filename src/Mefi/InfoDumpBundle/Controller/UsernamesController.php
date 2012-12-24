@@ -3,12 +3,11 @@
 namespace Mefi\InfoDumpBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Response;
 
 
 
-class UserInfoController extends Controller
+class UsernamesController extends Controller
 {
 
     public function signupsByDateDataAction() {

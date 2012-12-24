@@ -8,51 +8,39 @@ home_content:
   options:
     expose: true
 
-home_test_content:
-    pattern: /_home/test/content
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:testContent }
-    options:
-      expose: true
-
-home_test_data:
-    pattern: /_home/test/data
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:testData }
-    options:
-      expose: true
-
 signupsByDate_content:
     pattern: /_home/signupsByDate/content
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByDateContent }
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDateContent }
     options:
       expose: true
 
 signupsByDate_data:
     pattern: /_home/signupsByDate/data
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByDateData}
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDateData}
     options:
       expose: true
       
 signupsByMonth_content:
     pattern: /_home/signupsByMonth/content
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByMonthContent }
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthContent }
     options:
       expose: true
 
 signupsByMonth_data:
     pattern: /_home/signupsByMonth/data
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByMonthData}
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthData}
     options:
       expose: true
 
 signupsByYear_content:
     pattern: /_home/signupsByYear/content
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByYearContent }
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByYearContent }
     options:
       expose: true
 
 signupsByYear_data:
     pattern: /_home/signupsByYear/data
-    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByYearData}
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByYearData}
     options:
       expose: true
 
