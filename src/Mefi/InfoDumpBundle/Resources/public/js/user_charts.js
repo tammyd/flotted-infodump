@@ -13,11 +13,31 @@ var test = function () {
 };
 
 
-var signupsByMonth = function(data) {
+var signupsByDate = function(data) {
+    signupsOverTime(data, [1, 'day']);
+}
+
+var signupsByMonth= function(data) {
+    signupsOverTime(data, [1, 'month']);
+}
+
+var signupsByYear= function(data) {
+    signupsOverTime(data, [1, 'year']);
+}
+
+var signupsOverTime= function(data, tickSize) {
     var formattedData = [];
     for (i=0; i<data.length;i++) {
         var obj = data[i]
         formattedData.push([Date.parse(obj.date).getTime(), obj.count]);
     }
-    $.plot($("#graph"), [{data:formattedData, bars:{show:true}}], { xaxis: { mode: "time", minTickSize: [1, "month"] } });
+
+    var options = {
+        lines: { show: true },
+        points: { show: true },
+        xaxis: { mode: "time", minTickSize: tickSize}
+    };
+
+    $.plot($("#graph"),
+        [{data:formattedData}], options);
 };

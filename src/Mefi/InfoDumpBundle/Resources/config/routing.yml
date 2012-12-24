@@ -31,3 +31,16 @@ signupsByDate_data:
     defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByDateData}
     options:
       expose: true
+      
+signupsByMonth_content:
+    pattern: /_home/signupsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByMonthContent }
+    options:
+      expose: true
+
+signupsByMonth_data:
+    pattern: /_home/signupsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:UserInfo:signupsByMonthData}
+    options:
+      expose: true
+
