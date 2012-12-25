@@ -3,9 +3,15 @@
 namespace Mefi\InfoDumpBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use  Doctrine\ORM\Query\ResultSetMapping;
 
 class UsernamesRepository extends EntityRepository
 {
+
+    private function dowToString($i) {
+        return date('D', strtotime("Saturday +{$i} days"));
+    }
+
     public function getCountSignupsByDate()
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -33,6 +39,22 @@ SQL;
         $conn = $this->getEntityManager()->getConnection();
         $sql = "select count(*) as count, year(joindate) as date from usernames group by date order by date asc";
         return $conn->fetchAll($sql);
+    }
+
+    public function getCountSignupsByDayOfWeek() {
+
+        $rsm = new ResultSetMapping(); //Apparently using raw sql with the connection object isn't very doctrinific, this is the 'right' way.
+        $rsm->addScalarResult('dow', 'dow', 'integer');
+        $rsm->addScalarResult('count', 'count', 'integer');
+        $sql = "SELECT COUNT( * ) AS count, DAYOFWEEK( joindate ) AS dow FROM usernames GROUP BY dow ORDER BY dow ASC ";
+
+        $em = $this->getEntityManager();
+        $query = $em->createNativeQuery($sql, $rsm);
+        $result = $query->getResult();
+
+        $result = array_map(function ($r)  { $r['dayOfWeek']=$this->dowToString($r['dow']); return $r; }, $result);
+        return $result;
+
     }
 
 }

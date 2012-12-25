@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 
-class UsernamesController extends Controller
+class UsernamesController extends JsonDataController
 {
 
     public function signupsByDateDataAction() {
@@ -29,17 +29,9 @@ class UsernamesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByYear();
 
-
-        $response = new Response(json_encode($all));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $this->jsonResponse($all);
 
 
-    }
-
-    public function signupsByDateContentAction() {
-        return new Response("<p class='lead'>Signups By Date</p>");
     }
 
 
@@ -62,12 +54,18 @@ class UsernamesController extends Controller
 
         //TODO: empty data for Dec 04. Normalize this!
 
-        $response = new Response(json_encode($data));
-        $response->headers->set('Content-Type', 'application/json');
+        return $this->jsonResponse($data);
+    }
 
-        return $response;
+    public function signupsByDOWDataAction() {
+        return $this->jsonResponse($this->getDoctrine()
+            ->getManager()
+            ->getRepository('MefiInfoDumpBundle:Usernames')
+            ->getCountSignupsByDayOfWeek());
+    }
 
-
+    public function signupsByDateContentAction() {
+        return new Response("<p class='lead'>Signups By Date</p>");
     }
 
     public function signupsByMonthContentAction() {
@@ -76,5 +74,9 @@ class UsernamesController extends Controller
 
     public function signupsByYearContentAction() {
         return new Response("<p class='lead'>Signups By Year</p>");
+    }
+
+    public function signupsByDOWContentAction() {
+        return new Response("<p class='lead'>Signups By Day Of Week</p>");
     }
 }

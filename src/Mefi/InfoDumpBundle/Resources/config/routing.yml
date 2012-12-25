@@ -44,3 +44,16 @@ signupsByYear_data:
     options:
       expose: true
 
+signupsByDOW_content:
+    pattern: /_home/signupsByDOW/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDOWContent }
+    options:
+      expose: true
+
+signupsByDOW_data:
+    pattern: /_home/signupsByDOW/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDOWData}
+    options:
+      expose: true
+
+
