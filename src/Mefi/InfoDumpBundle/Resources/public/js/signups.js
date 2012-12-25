@@ -20,18 +20,7 @@ var signupsByMonth= function(jsonData) {
     var graph = graphHelpers.graph();
     var plotData = [];
 
-    var options = {
-        xaxis: {
-            ticks: []
-        },
-        series: {
-            lines: { show: true },
-            points: { show: true }
-        },
-        grid: { hoverable: true, clickable: true },
-        selection: { mode: "xy" },
-        legend: { noColumns: 1 }
-    }
+    var options = graphHelpers.lineGraphOptions();
 
     var doDisplay = function() {
         //Using the jsonData, build up the plot data
@@ -99,18 +88,7 @@ var signupsByDOW = function(data) {
     var graph = graphHelpers.graph();
     var plotData = [];
 
-    var options = {
-        xaxis: {
-            ticks: []
-        },
-        series: {
-            lines: { show: true },
-            points: { show: true }
-        },
-        grid: { hoverable: true, clickable: true },
-        selection: { mode: "xy" },
-        legend: { noColumns: 1 }
-    }
+    var options = graphHelpers.lineGraphOptions();
 
     for (i=0;i<data.length;i++) {
         var record = data[i]

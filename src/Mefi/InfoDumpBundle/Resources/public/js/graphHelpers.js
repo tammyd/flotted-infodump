@@ -22,6 +22,22 @@ var graphHelpers = (function() {
                 7:'July', 8:'Oct', 9:'Sept', 10:'Oct', 11:'Nov', 12:'Dec'
             }
             return months[i];
+        },
+
+        lineGraphOptions: function() {
+            var options = {
+                xaxis: {
+                    ticks: []
+                },
+                series: {
+                    lines: { show: true },
+                    points: { show: true }
+                },
+                grid: { hoverable: true, clickable: true },
+                selection: { mode: "xy" },
+                legend: { noColumns: 1 }
+            }
+            return options;
         }
     }
 })();
