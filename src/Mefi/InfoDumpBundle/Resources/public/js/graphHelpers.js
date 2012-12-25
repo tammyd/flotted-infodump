@@ -23,6 +23,12 @@ var graphHelpers = (function() {
             }
             return months[i];
         },
+        getDOWAbbr: function(i) {
+            var dow = {
+                1:'Sunday', 2:'Monday', 3:'Tuesday', 4:'Wednesday', 5:'Thursday', 6:'Friday', 7:'Saturday'
+            }
+            return dow[i];
+        },
 
         lineGraphOptions: function() {
             var options = {
@@ -30,14 +36,33 @@ var graphHelpers = (function() {
                     ticks: []
                 },
                 series: {
-                    lines: { show: true },
-                    points: { show: true }
+                    points: { show: true },
+                    lines: { show: true }
                 },
                 grid: { hoverable: true, clickable: true },
                 selection: { mode: "xy" },
                 legend: { noColumns: 1 }
+
             }
             return options;
+        },
+
+        barGraphOptions: function() {
+            var options = {
+                xaxis: {
+                    ticks: []
+                },
+                series: {
+                    bars: { show: true },
+                    points: { show: false }
+                },
+                grid: { hoverable: true, clickable: true },
+                selection: { mode: "xy" },
+                legend: { noColumns: 1 }
+
+            }
+            return options;
+
         }
     }
 })();

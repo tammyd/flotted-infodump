@@ -88,7 +88,7 @@ var signupsByDOW = function(data) {
     var graph = graphHelpers.graph();
     var plotData = [];
 
-    var options = graphHelpers.lineGraphOptions();
+    var options = graphHelpers.barGraphOptions();
 
     for (i=0;i<data.length;i++) {
         var record = data[i]
@@ -103,15 +103,6 @@ var signupsByDOW = function(data) {
     var plot = $.plot(graph, plotData, options);
     var previousPoint = null;
 
-    //bind the plot to click and over events
-    graph.bind("plotclick", function (event, pos, item) {
-        if (item) {
-            plot.unhighlight();
-            plot.highlight(item.series, item.datapoint);
-
-        }
-    });
-
 
     graph.bind("plothover", function (event, pos, item) {
         $("#x").text(pos.x);
@@ -125,7 +116,7 @@ var signupsByDOW = function(data) {
                 var x = item.datapoint[0].toFixed(0),
                     y = item.datapoint[1].toFixed(0);
 
-                var tt = graphHelpers.getMonthAbbr(parseInt(x)) + " " + item.series.label + ": " + parseInt(y) + " signups";
+                var tt = parseInt(y) + " " + graphHelpers.getDOWAbbr(parseInt(x)) + " signups";
                 graphHelpers.showTooltip(item.pageX, item.pageY,tt );
             }
         }
