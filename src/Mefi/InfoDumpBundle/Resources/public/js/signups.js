@@ -85,18 +85,101 @@ var signupsByMonth= function(jsonData) {
 
 }
 
+//Base class
+var flotChartDisplay = (function(protected) {
+
+    //chart private variables
+    protected = protected || {};
+    protected.jsonData = null,
+        protected.graph = null,
+        protected.previousPoint = null,
+        protected.data = null,
+        protected.tooltipId = null,
+        protected.options = null;
+
+    protected.getOptions = function() {
+        return {};
+    };
+
+    protected.prepData = function(jsonData) {
+            return jsonData;
+    };
+
+    protected.showTooltip = function(id, x, y, contents) {
+        var div = $('<div id="' + id + '">' + contents + '</div>');
+        div.css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    };
+
+    protected.tooltipContent = function(item) {
+            return "This is a tooltip."
+    };
+
+    protected.hideTooltip = function(id) {
+        $('#'+id).remove();
+    };
+
+    protected.selected = function (event, ranges) {
+        var opt = $.extend(true, {}, protected.options, {
+            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
+            yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
+        });
+        $.plot(protected.graph,protected.data, opt);
+    };
+
+    protected.unselected = function () {
+        $.plot(protected.graph,protected.data, protected.options);
+    };
+
+    protected.hover = function (event, pos, item) {
+        if (item) {
+            var index = item.seriesIndex.toFixed(0) + item.dataIndex.toFixed(0);
+
+            if (protected.previousPoint != index) {
+                protected.hideTooltip(protected.tooltipId);
+                protected.showTooltip(protected.tooltipId, item.pageX, item.pageY, protected.tooltipContent(item));
+            }
+        }
+        else {
+            protected.hideTooltip(protected.tooltipId);
+            protected.previousPoint = null;
+        }
+    };
+
+    protected.showGraph = function(data) {
+        protected.jsonData = data;
+        protected.graph = $("#graph");
+        protected.tooltipId = 'tooltip';
+        protected.options = protected.getOptions();
+        protected.data = protected.prepData(protected.jsonData);
+        var plot = $.plot(protected.graph, protected.data, protected.options);
+        protected.graph.bind("plothover", protected.hover);
+        protected.graph.bind("plotselected", protected.selected);
+        protected.graph.bind("plotunselected",protected.unselected);
+    }
+    
+    return {
+        show:protected.showGraph
+    }
+
+});
+
+
 
 var signupsByDOW = (function() {
 
-    //chart variables
-    var jsonData = null;
-    var graph = graphHelpers.graph();
-    var previousPoint = null;
-    var data = null;
-    var tooltipId = 'tooltip';
-    var options = null;
+    var protectedInfo = {};
+    var thisGraph = flotChartDisplay(protectedInfo);
 
-    var getOptions = function() {
+    protectedInfo.getOptions = function() {
         var options =  {
             xaxis: {
                 ticks: [], min: 0.5, max: 8.5
@@ -119,7 +202,7 @@ var signupsByDOW = (function() {
         return options;
     };
 
-    var prepData = function(jsonData) {
+    protectedInfo.prepData = function(jsonData) {
         var plotData = [];
         $.each(jsonData, function(year, dowData) {
             var obj = {'label':year, data:[]}
@@ -132,155 +215,15 @@ var signupsByDOW = (function() {
         return plotData;
     };
 
-    var showTooltip = function(id, x, y, contents) {
-        var div = $('<div id="' + id + '">' + contents + '</div>');
-        div.css( {
-            position: 'absolute',
-            display: 'none',
-            top: y + 5,
-            left: x + 5,
-            border: '1px solid #fdd',
-            padding: '2px',
-            'background-color': '#fee',
-            opacity: 0.80
-        }).appendTo("body").fadeIn(200);
-    };
-
-    var hideTooltip = function(id) {
-        $('#'+id).remove();
-    };
-
-    var hover = function (event, pos, item) {
-        if (item) {
-            var index = item.seriesIndex.toFixed(0) + item.dataIndex.toFixed(0);
-
-            if (previousPoint != index) {
-                hideTooltip(tooltipId);
-                var x = item.datapoint[0],
-                    y = item.datapoint[1] - item.datapoint[2]
-
-                var tt = item.series.label + ": " + y + " " + graphHelpers.getDOWAbbr(x) + " signups";
-                showTooltip(tooltipId, item.pageX, item.pageY, tt);
-            }
-        }
-        else {
-            hideTooltip(tooltipId);
-            previousPoint = null;
-        }
-    };
-
-    var selected = function (event, ranges) {
-        var opt = $.extend(true, {}, options, {
-            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-            yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
-        });
-        $.plot(graph,data, opt);
-    };
-
-    var unselected = function () {
-        $.plot(graph, data, options);
-    };
-
-    var showGraph = function(data) {
-        console.log(jsonData);
-        jsonData = data;
-        graph = $("#graph");
-        tooltipId = 'tooltip';
-        options = getOptions();
-        data = prepData(jsonData);
-        var plot = $.plot(graph, data, options);
-        graph.bind("plothover", hover);
-        graph.bind("plotselected", selected);
-        graph.bind("plotunselected",unselected);
+    protectedInfo.tooltipContent = function(item) {
+        var x = item.datapoint[0],
+            y = item.datapoint[1] - item.datapoint[2]
+        return item.series.label + ": " + y + " " + graphHelpers.getDOWAbbr(x) + " signups";
     }
 
-    return {
-        show: function(jsonData) {
-            showGraph(jsonData);
-        }
-    }
+    return thisGraph;
 
 })();
-
-
-
-var signupsByDOWX = function(data) {
-    var graph = graphHelpers.graph();
-    var options = graphHelpers.lineGraphOptions();
-    var plotData = [];
-
-    options = $.extend(true, {}, options, {
-       series: {stack: true},
-       lines: { show: false },
-       bars: { show: true, barWidth: 0.6 },
-       xaxis: { min: 0.5, max: 8.5 }
-    });
-
-    //Using the jsonData, build up the plot data
-    $.each(data, function(year, dowData) {
-        var obj = {'label':year, data:[]}
-        $.each(dowData, function(dow, count) {
-            obj.data.push([dow, count])
-        });
-        plotData.push(obj)
-       // options.xaxis.ticks[dow-1] = [dow, ]
-    });
-
-    //auto generate the plot ticks
-    for (i=1;i<=7;i++) {
-        options.xaxis.ticks.push([i +.3,graphHelpers.getDOWAbbr(i)]);
-    }
-
-
-
-    //plot the data
-    var plot = $.plot(graph, plotData, options);
-    var previousPoint = null;
-
-
-    graph.bind("plothover", function (event, pos, item) {
-        $("#x").text(pos.x);
-        $("#y").text(pos.y);
-
-        if (item) {
-            if (previousPoint != item.dataIndex) {
-                previousPoint = item.dataIndex;
-
-                $("#tooltip").remove();
-                var x = item.datapoint[0]
-                    y = item.datapoint[2] - item.datapoint[1]
-
-                var value = data[parseInt(item.series.label)][parseInt(x)];
-                var tt = item.series.label + ": " + value + " " + graphHelpers.getDOWAbbr(parseInt(x)) + " signups";
-                graphHelpers.showTooltip(item.pageX, item.pageY,tt );
-            }
-        }
-        else {
-            $("#tooltip").remove();
-            previousPoint = null;
-        }
-    });
-
-    graph.bind("plotselected", function (event, ranges) {
-
-
-        var opt = $.extend(true, {}, options, {
-            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-            yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
-        });
-        console.log(plotData);
-        $.plot(graph,plotData, opt);
-    });
-
-    graph.bind("plotunselected", function () {
-
-        $.plot(graph,
-            plotData, options);
-    });
-
-
-
-};
 
 
 var signupsOverTime= function(data, tickSize, tooltipText) {
