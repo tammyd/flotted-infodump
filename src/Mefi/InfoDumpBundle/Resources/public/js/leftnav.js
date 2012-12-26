@@ -58,7 +58,10 @@ $(document).ready(function()
                 url: dataUri
             }).done(function( data) {
                 if (displayFtn !== undefined) {
-                    window[displayFtn](data);
+                    //window[displayFtn](data);
+                    console.log(displayFtn);
+                    console.log(window[displayFtn]);
+                    window[displayFtn].show(data);
                     $('#content').load(contentUri, showPage);
                 }
              });

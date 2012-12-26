@@ -15,6 +15,7 @@ var signupsByYear= function(data) {
     signupsOverTime(data, [1, 'year'], tooltipText);
 }
 
+
 var signupsByMonth= function(jsonData) {
 
     var graph = graphHelpers.graph();
@@ -84,7 +85,126 @@ var signupsByMonth= function(jsonData) {
 
 }
 
-var signupsByDOW = function(data) {
+
+var signupsByDOW = (function() {
+
+    //chart variables
+    var jsonData = null;
+    var graph = graphHelpers.graph();
+    var previousPoint = null;
+    var data = null;
+    var tooltipId = 'tooltip';
+    var options = null;
+
+    var getOptions = function() {
+        var options =  {
+            xaxis: {
+                ticks: [], min: 0.5, max: 8.5
+            },
+            series: {
+                stack: true,
+                points: { show: true }
+            },
+            grid: { hoverable: true, clickable: true },
+            selection: { mode: "xy" },
+            legend: { noColumns: 1 },
+            bars: { show: true, barWidth: 0.6 }
+        };
+
+
+        for (i=1;i<=7;i++) {
+            options.xaxis.ticks.push([i +.3,graphHelpers.getDOWAbbr(i)]);
+        }
+
+        return options;
+    };
+
+    var prepData = function(jsonData) {
+        var plotData = [];
+        $.each(jsonData, function(year, dowData) {
+            var obj = {'label':year, data:[]}
+            $.each(dowData, function(dow, count) {
+                obj.data.push([dow, count])
+            });
+            plotData.push(obj)
+        });
+
+        return plotData;
+    };
+
+    var showTooltip = function(id, x, y, contents) {
+        var div = $('<div id="' + id + '">' + contents + '</div>');
+        div.css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    };
+
+    var hideTooltip = function(id) {
+        $('#'+id).remove();
+    };
+
+    var hover = function (event, pos, item) {
+        if (item) {
+            var index = item.seriesIndex.toFixed(0) + item.dataIndex.toFixed(0);
+
+            if (previousPoint != index) {
+                hideTooltip(tooltipId);
+                var x = item.datapoint[0],
+                    y = item.datapoint[1] - item.datapoint[2]
+
+                var tt = item.series.label + ": " + y + " " + graphHelpers.getDOWAbbr(x) + " signups";
+                showTooltip(tooltipId, item.pageX, item.pageY, tt);
+            }
+        }
+        else {
+            hideTooltip(tooltipId);
+            previousPoint = null;
+        }
+    };
+
+    var selected = function (event, ranges) {
+        var opt = $.extend(true, {}, options, {
+            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
+            yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
+        });
+        $.plot(graph,data, opt);
+    };
+
+    var unselected = function () {
+        $.plot(graph, data, options);
+    };
+
+    var showGraph = function(data) {
+        console.log(jsonData);
+        jsonData = data;
+        graph = $("#graph");
+        tooltipId = 'tooltip';
+        options = getOptions();
+        data = prepData(jsonData);
+        var plot = $.plot(graph, data, options);
+        graph.bind("plothover", hover);
+        graph.bind("plotselected", selected);
+        graph.bind("plotunselected",unselected);
+    }
+
+    return {
+        show: function(jsonData) {
+            showGraph(jsonData);
+        }
+    }
+
+})();
+
+
+
+var signupsByDOWX = function(data) {
     var graph = graphHelpers.graph();
     var options = graphHelpers.lineGraphOptions();
     var plotData = [];
@@ -127,8 +247,8 @@ var signupsByDOW = function(data) {
                 previousPoint = item.dataIndex;
 
                 $("#tooltip").remove();
-                var x = item.datapoint[0].toFixed(0),
-                    y = item.datapoint[1].toFixed(0);
+                var x = item.datapoint[0]
+                    y = item.datapoint[2] - item.datapoint[1]
 
                 var value = data[parseInt(item.series.label)][parseInt(x)];
                 var tt = item.series.label + ": " + value + " " + graphHelpers.getDOWAbbr(parseInt(x)) + " signups";
@@ -160,7 +280,7 @@ var signupsByDOW = function(data) {
 
 
 
-}
+};
 
 
 var signupsOverTime= function(data, tickSize, tooltipText) {
