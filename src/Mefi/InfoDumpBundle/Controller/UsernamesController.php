@@ -58,10 +58,24 @@ class UsernamesController extends JsonDataController
     }
 
     public function signupsByDOWDataAction() {
-        return $this->jsonResponse($this->getDoctrine()
+        $arrData = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->getCountSignupsByDayOfWeek());
+            ->getCountSignupsByDayOfWeek();
+
+        $data = array();
+        foreach ($arrData as $record) {
+            $year = intval($record['year']);
+            $dow = intval($record['dow']);
+            $count = intval($record['count']);
+
+            if (!isset($data[$year])) {
+                $data[$year] = array();
+            }
+            $data[$year][$dow] = $count;
+        }
+
+        return $this->jsonResponse($data);
     }
 
     public function signupsByDateContentAction() {

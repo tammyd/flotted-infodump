@@ -46,7 +46,8 @@ SQL;
         $rsm = new ResultSetMapping(); //Apparently using raw sql with the connection object isn't very doctrinific, this is the 'right' way.
         $rsm->addScalarResult('dow', 'dow', 'integer');
         $rsm->addScalarResult('count', 'count', 'integer');
-        $sql = "SELECT COUNT( * ) AS count, DAYOFWEEK( joindate ) AS dow FROM usernames GROUP BY dow ORDER BY dow ASC ";
+        $rsm->addScalarResult('year', 'year', 'integer');
+        $sql = "SELECT COUNT( * ) AS count, year(joindate) as year, DAYOFWEEK( joindate ) AS dow FROM usernames GROUP BY year,dow ORDER BY year asc, dow ASC ";
 
         $em = $this->getEntityManager();
         $query = $em->createNativeQuery($sql, $rsm);

@@ -86,17 +86,31 @@ var signupsByMonth= function(jsonData) {
 
 var signupsByDOW = function(data) {
     var graph = graphHelpers.graph();
+    var options = graphHelpers.lineGraphOptions();
     var plotData = [];
 
-    var options = graphHelpers.barGraphOptions();
+    options = $.extend(true, {}, options, {
+       series: {stack: true},
+       lines: { show: false },
+       bars: { show: true, barWidth: 0.6 },
+       xaxis: { min: 0.5, max: 8.5 }
+    });
 
-    for (i=0;i<data.length;i++) {
-        var record = data[i]
+    //Using the jsonData, build up the plot data
+    $.each(data, function(year, dowData) {
+        var obj = {'label':year, data:[]}
+        $.each(dowData, function(dow, count) {
+            obj.data.push([dow, count])
+        });
+        plotData.push(obj)
+       // options.xaxis.ticks[dow-1] = [dow, ]
+    });
 
-        plotData.push([record.dow, record.count])
-        options.xaxis.ticks.push([record.dow,record.dayOfWeek]);
+    //auto generate the plot ticks
+    for (i=1;i<=7;i++) {
+        options.xaxis.ticks.push([i +.3,graphHelpers.getDOWAbbr(i)]);
     }
-    plotData = [{label:'# Signups', 'data':plotData}];
+
 
 
     //plot the data
@@ -116,7 +130,8 @@ var signupsByDOW = function(data) {
                 var x = item.datapoint[0].toFixed(0),
                     y = item.datapoint[1].toFixed(0);
 
-                var tt = parseInt(y) + " " + graphHelpers.getDOWAbbr(parseInt(x)) + " signups";
+                var value = data[parseInt(item.series.label)][parseInt(x)];
+                var tt = item.series.label + ": " + value + " " + graphHelpers.getDOWAbbr(parseInt(x)) + " signups";
                 graphHelpers.showTooltip(item.pageX, item.pageY,tt );
             }
         }
