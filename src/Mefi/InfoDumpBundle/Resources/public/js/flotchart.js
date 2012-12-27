@@ -8,7 +8,9 @@ var flotChartDisplay = (function(protected) {
         protected.previousPoint = null,
         protected.data = null,
         protected.tooltipId = null,
-        protected.options = null;
+        protected.options = null,
+        protected.hovercount = 0,
+        protected.hoveroff = 5;
 
     protected.getOptions = function() {
         return {};
@@ -18,8 +20,8 @@ var flotChartDisplay = (function(protected) {
         return jsonData;
     };
 
-    protected.showTooltip = function(id, x, y, contents) {
-        var div = $('<div id="' + id + '">' + contents + '</div>');
+    protected.showTooltip = function(x, y, contents) {
+        var div = $('<div id="' + protected.tooltipId + '">' + contents + '</div>');
         div.css( {
             position: 'absolute',
             display: 'none',
@@ -36,9 +38,11 @@ var flotChartDisplay = (function(protected) {
         return "This is a tooltip."
     };
 
-    protected.hideTooltip = function(id) {
-        $('#'+id).remove();
+    protected.hideTooltip = function() {
+        protected.hovercount = 0;
+        $('#'+protected.tooltipId).remove();
     };
+
 
     protected.selected = function (event, ranges) {
         var opt = $.extend(true, {}, protected.options, {
@@ -53,17 +57,21 @@ var flotChartDisplay = (function(protected) {
     };
 
     protected.hover = function (event, pos, item) {
+
         if (item) {
             var index = item.seriesIndex.toFixed(0) + item.dataIndex.toFixed(0);
 
             if (protected.previousPoint != index) {
-                protected.hideTooltip(protected.tooltipId);
-                protected.showTooltip(protected.tooltipId, item.pageX, item.pageY, protected.tooltipContent(item));
+                protected.hideTooltip();
+                protected.showTooltip(item.pageX, item.pageY, protected.tooltipContent(item));
             }
         }
         else {
-            protected.hideTooltip(protected.tooltipId);
-            protected.previousPoint = null;
+            protected.hovercount += 1;
+            if (protected.hovercount > protected.hoveroff) {
+                protected.hideTooltip();
+                protected.previousPoint = null;
+            }
         }
     };
 
@@ -92,10 +100,12 @@ var flotChartDisplay = (function(protected) {
         protected.graph.bind("plothover", protected.hover);
         protected.graph.bind("plotselected", protected.selected);
         protected.graph.bind("plotunselected",protected.unselected);
+        protected.hideTooltip();
     }
 
     return {
-        show:protected.showGraph
+        show:protected.showGraph,
+        hideTooltip: protected.hideTooltip
     }
 
 });
