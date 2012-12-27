@@ -23,10 +23,14 @@
   <div class="container">
     <div class="row">
       <div class="span3"> <!-- sidebar -->
-        {% render "MefiInfoDumpBundle:Common:leftnav" %}
+        {% block leftnav %}
+          {% render "MefiInfoDumpBundle:Common:leftnav" %}
+        {% endblock %}
       </div><!--/span-->
       <div class="span9"> <!--Body content-->
-        {% render "MefiInfoDumpBundle:Home:template" %}
+        {%  block template %}
+          {% render "MefiInfoDumpBundle:Home:template" %}
+        {% endblock %}
       </div>
     </div>
   </div>

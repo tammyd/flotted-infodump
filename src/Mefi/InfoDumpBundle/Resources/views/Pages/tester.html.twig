@@ -1,0 +1,17 @@
+{% extends 'MefiInfoDumpBundle:Pages:home.html.twig' %}
+
+{% block leftnav %}
+  {% render url(content_route) %}
+{% endblock %}
+
+
+{%  block template %}
+  <div id="content">
+    <pre>
+    {% render url(data_route) %}
+    </pre>
+
+  </div>
+
+{% endblock %}
+

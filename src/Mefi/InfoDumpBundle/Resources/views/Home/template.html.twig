@@ -1,5 +1,17 @@
-<div id="content"></div>
-<div id="spinner"></div>
+
+<div id="content">
+  {% block template_content %}
+  {% endblock %}
+</div>
+
+{% block spinner %}
+<div id="spinner">
+</div>
+{% endblock %}
+
 <div id="graph-container">
-  <div id="graph" style="width:830px;height:400px;"></div>
+  <div id="graph" style="width:830px;height:400px;">
+    {% block graph_content %}
+    {% endblock %}
+  </div>
 </div>

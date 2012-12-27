@@ -2,6 +2,10 @@ home:
     pattern:  /
     defaults: { _controller: MefiInfoDumpBundle:Home:index }
 
+home_tester:
+  pattern: /_home/tester/{graph}
+  defaults: {_controller: MefiInfoDumpBundle:Home:tester }
+
 home_content:
   pattern: /home/content
   defaults: {_controller: MefiInfoDumpBundle:Home:content }
