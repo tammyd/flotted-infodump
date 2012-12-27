@@ -75,6 +75,12 @@ var flotChartDisplay = (function(protected) {
         return Date.today().moveToDayOfWeek(i-1).toString('dddd');
     }
 
+    protected.unbindEvents = function() {
+        protected.graph.unbind("plothover");
+        protected.graph.unbind("plotselected");
+        protected.graph.unbind("plotunselected");
+    }
+
     protected.showGraph = function(data) {
         protected.jsonData = data;
         protected.graph = $("#graph");
@@ -82,6 +88,7 @@ var flotChartDisplay = (function(protected) {
         protected.options = protected.getOptions();
         protected.data = protected.prepData(protected.jsonData);
         var plot = $.plot(protected.graph, protected.data, protected.options);
+        protected.unbindEvents();
         protected.graph.bind("plothover", protected.hover);
         protected.graph.bind("plotselected", protected.selected);
         protected.graph.bind("plotunselected",protected.unselected);

@@ -58,7 +58,7 @@ $(document).ready(function()
                 url: dataUri
             }).done(function( data) {
                 if (displayFtn !== undefined) {
-                    window[displayFtn].show(data);
+                    window[displayFtn]().show(data);
                     $('#content').load(contentUri, showPage);
                 }
              });

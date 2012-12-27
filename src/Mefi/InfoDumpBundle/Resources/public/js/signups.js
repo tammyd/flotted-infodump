@@ -35,7 +35,7 @@ var signupsByDate = (function() {
     };
 
     return thisGraph;
-})();
+});
 
 
 var signupsByYear = (function() {
@@ -78,7 +78,7 @@ var signupsByYear = (function() {
 
     return thisGraph;
 
-})();
+});
 
 var signupsByMonth = (function() {
 
@@ -128,7 +128,7 @@ var signupsByMonth = (function() {
 
     return thisGraph;
 
-})();
+});
 
 
 var signupsByDOW = (function() {
@@ -180,4 +180,4 @@ var signupsByDOW = (function() {
 
     return thisGraph;
 
-})();
+});
