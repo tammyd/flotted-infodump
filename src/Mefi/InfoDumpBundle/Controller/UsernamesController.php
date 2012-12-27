@@ -15,7 +15,6 @@ class UsernamesController extends JsonDataController
         $em = $this->getDoctrine()->getManager();
         $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByDate();
 
-
         $response = new Response(json_encode($all));
         $response->headers->set('Content-Type', 'application/json');
 
@@ -52,8 +51,7 @@ class UsernamesController extends JsonDataController
             $data[$year][$month] = intval($count);
         }
 
-        //TODO: empty data for Dec 04. Normalize this!
-
+        $data = $this->normalize2DData($data);
         return $this->jsonResponse($data);
     }
 
@@ -75,6 +73,7 @@ class UsernamesController extends JsonDataController
             $data[$year][$dow] = $count;
         }
 
+        $data = $this->normalize2DData($data);
         return $this->jsonResponse($data);
     }
 
