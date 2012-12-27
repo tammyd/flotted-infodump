@@ -14,24 +14,35 @@ class UsernamesRepository extends EntityRepository
 
     public function getCountSignupsByDate()
     {
-        $conn = $this->getEntityManager()->getConnection();
         $sql = "select count(*) as count, date(joindate) as date from usernames group by date order by date asc";
-        return $conn->fetchAll($sql);
+
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('date', 'date', 'string');
+        $rsm->addScalarResult('count', 'count', 'integer');
+        return $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+            ->getResult();
+
     }
 
     public function getCountSignupsByMonth()
     {
-        $conn = $this->getEntityManager()->getConnection();
-        $sql = <<<SQL
 
+        $sql = <<<SQL
 SELECT COUNT( * ) AS count, month(joindate) as month, year(joindate) as year
 FROM usernames
 GROUP BY month,year
 ORDER BY year asc, month asc
-
 SQL;
 
-        return $conn->fetchAll($sql);
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('count', 'count', 'integer');
+        $rsm->addScalarResult('month', 'month', 'integer');
+        $rsm->addScalarResult('year', 'year', 'integer');
+
+        return $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+            ->getResult();
     }
 
     public function getCountSignupsByYear()
@@ -41,9 +52,10 @@ SQL;
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('date', 'date', 'integer');
         $rsm->addScalarResult('count', 'count', 'integer');
-        $em = $this->getEntityManager();
-        $query = $em->createNativeQuery($sql, $rsm);
-        return $query->getResult();
+
+        return $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+            ->getResult();
     }
 
     public function getCountSignupsByDayOfWeek() {
@@ -54,9 +66,9 @@ SQL;
         $rsm->addScalarResult('year', 'year', 'integer');
         $sql = "SELECT COUNT( * ) AS count, year(joindate) as year, DAYOFWEEK( joindate ) AS dow FROM usernames GROUP BY year,dow ORDER BY year asc, dow ASC ";
 
-        $em = $this->getEntityManager();
-        $query = $em->createNativeQuery($sql, $rsm);
-        $result = $query->getResult();
+        $result = $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+            ->getResult();
 
         $result = array_map(function ($r)  { $r['dayOfWeek']=$this->dowToString($r['dow']); return $r; }, $result);
         return $result;
