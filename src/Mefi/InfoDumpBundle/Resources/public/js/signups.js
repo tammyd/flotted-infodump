@@ -1,90 +1,3 @@
-var signupsByDate = function(data) {
-
-    var tooltipText = function(label, x, y) {
-        return new Date(parseInt(x)).toDateString() + ": " + parseInt(y) + " signups";
-    }
-
-    signupsOverTime(data, [1, 'day'], tooltipText);
-}
-
-var signupsByYear= function(data) {
-    var tooltipText = function(label, x, y) {
-        return new Date(parseInt(x)).getFullYear() + ": " + parseInt(y) + " signups";
-    }
-
-    signupsOverTime(data, [1, 'year'], tooltipText);
-}
-
-
-var signupsByMonth= function(jsonData) {
-
-    var graph = graphHelpers.graph();
-    var plotData = [];
-
-    var options = graphHelpers.lineGraphOptions();
-
-    var doDisplay = function() {
-        //Using the jsonData, build up the plot data
-        $.each(jsonData, function(year, monthData) {
-            var obj = {'label':year, data:[]}
-            $.each(monthData, function(month, count) {
-                obj.data.push([month, count])
-            });
-            plotData.push(obj)
-        });
-
-        //auto generate the plot ticks
-        for (i=1;i<=12;i++) {
-            options.xaxis.ticks.push([i,graphHelpers.getMonthAbbr(i)]);
-        }
-
-
-        //plot the data
-        var plot = $.plot(graph, plotData, options);
-        var previousPoint = null;
-
-        graph.bind("plothover", function (event, pos, item) {
-            $("#x").text(pos.x);
-            $("#y").text(pos.y);
-
-            if (item) {
-                if (previousPoint != item.dataIndex) {
-                    previousPoint = item.dataIndex;
-
-                    $("#tooltip").remove();
-                    var x = item.datapoint[0].toFixed(2),
-                        y = item.datapoint[1].toFixed(2);
-
-                    var tt = graphHelpers.getMonthAbbr(parseInt(x)) + " " + item.series.label + ": " + parseInt(y) + " signups";
-                    graphHelpers.showTooltip(item.pageX, item.pageY,tt );
-                }
-            }
-            else {
-                $("#tooltip").remove();
-                previousPoint = null;
-            }
-        });
-
-        graph.bind("plotselected", function (event, ranges) {
-
-            var opt = $.extend(true, {}, options, {
-                xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-                yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
-            });
-            $.plot(graph,plotData, opt);
-        });
-
-        graph.bind("plotunselected", function () {
-
-            $.plot(graph,
-                plotData, options);
-        });
-    };
-
-    doDisplay();
-
-}
-
 //Base class
 var flotChartDisplay = (function(protected) {
 
@@ -102,7 +15,7 @@ var flotChartDisplay = (function(protected) {
     };
 
     protected.prepData = function(jsonData) {
-            return jsonData;
+        return jsonData;
     };
 
     protected.showTooltip = function(id, x, y, contents) {
@@ -120,7 +33,7 @@ var flotChartDisplay = (function(protected) {
     };
 
     protected.tooltipContent = function(item) {
-            return "This is a tooltip."
+        return "This is a tooltip."
     };
 
     protected.hideTooltip = function(id) {
@@ -154,6 +67,14 @@ var flotChartDisplay = (function(protected) {
         }
     };
 
+    protected.monthName = function(i) {
+        return Date.parse(i+"/01/2012").toString('MMM');
+    }
+
+    protected.dayOfWeekName = function(i) {
+        return Date.today().moveToDayOfWeek(i-1).toString('dddd');
+    }
+
     protected.showGraph = function(data) {
         protected.jsonData = data;
         protected.graph = $("#graph");
@@ -165,13 +86,142 @@ var flotChartDisplay = (function(protected) {
         protected.graph.bind("plotselected", protected.selected);
         protected.graph.bind("plotunselected",protected.unselected);
     }
-    
+
     return {
         show:protected.showGraph
     }
 
 });
 
+var signupsByDate = (function() {
+    var protectedInfo = {};
+    var thisGraph = flotChartDisplay(protectedInfo);
+
+    protectedInfo.prepData = function(jsonData) {
+        var data = [];
+        for (i=0; i<jsonData.length;i++) {
+            var obj = jsonData[i]
+            data.push([Date.parse(obj.date).getTime(), obj.count]);
+        }
+
+        return [data];
+
+    };
+
+    protectedInfo.tooltipContent = function(item) {
+        var x = item.datapoint[0],
+            y = item.datapoint[1];
+        return new Date(x).toDateString() + ": " + y + " signups";
+    }
+
+
+    protectedInfo.getOptions = function() {
+        var options = {
+            lines: { show: true },
+            points: { show: true },
+            xaxis: { mode: "time", minTickSize: [1, 'day'], tickDecimals: 0},
+            grid: { hoverable: true, clickable: true },
+            selection: { mode: "xy" }
+        };
+
+        return options;
+    };
+
+    return thisGraph;
+})();
+
+
+var signupsByYear = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = flotChartDisplay(protectedInfo);
+
+    protectedInfo.prepData = function(jsonData) {
+        var data = [];
+        for (i=0; i<jsonData.length;i++) {
+            var obj = jsonData[i]
+            data.push([Date.parse(obj.date.toString()).getTime(), obj.count]);
+        }
+
+        return [data];
+
+    };
+
+    protectedInfo.tooltipContent = function(item) {
+        var x = item.datapoint[0],
+            y = item.datapoint[1];
+
+        var year = 1900+new Date(x).getYear();
+        return year + ": " + y + " signups";
+
+    }
+
+
+    protectedInfo.getOptions = function() {
+        var options = {
+            lines: { show: true },
+            points: { show: true },
+            xaxis: { mode: "time", minTickSize: [1, 'year'], tickDecimals: 0},
+            grid: { hoverable: true, clickable: true },
+            selection: { mode: "xy" }
+        };
+
+        return options;
+    };
+
+    return thisGraph;
+
+})();
+
+var signupsByMonth = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = flotChartDisplay(protectedInfo);
+
+    protectedInfo.getOptions = function() {
+        var options =  {
+            xaxis: {
+                ticks: [], min: 0.5, max: 14
+            },
+            series: {
+                stack: true,
+                points: { show: false }
+            },
+            grid: { hoverable: true, clickable: true },
+            selection: { mode: "xy" },
+            legend: { noColumns: 1 },
+            bars: { show: true, barWidth: 0.6 }
+        };
+
+        for (i=1;i<=12;i++) {
+            options.xaxis.ticks.push([i +.3,protectedInfo.monthName(i)]);
+        }
+
+        return options;
+    };
+
+    protectedInfo.prepData = function(jsonData) {
+        var plotData = [];
+        $.each(jsonData, function(year, monthData) {
+            var obj = {'label':year, data:[]}
+            $.each(monthData, function(month, count) {
+                obj.data.push([month, count])
+            });
+            plotData.push(obj)
+        });
+
+        return plotData;
+    };
+
+    protectedInfo.tooltipContent = function(item) {
+        var x = item.datapoint[0],
+            y = item.datapoint[1] - item.datapoint[2]
+        return graphHelpers.getMonthAbbr(x) + " " + item.series.label + ": " +y + " signups";
+    }
+
+    return thisGraph;
+
+})();
 
 
 var signupsByDOW = (function() {
@@ -186,7 +236,7 @@ var signupsByDOW = (function() {
             },
             series: {
                 stack: true,
-                points: { show: true }
+                points: { show: false }
             },
             grid: { hoverable: true, clickable: true },
             selection: { mode: "xy" },
@@ -196,7 +246,7 @@ var signupsByDOW = (function() {
 
 
         for (i=1;i<=7;i++) {
-            options.xaxis.ticks.push([i +.3,graphHelpers.getDOWAbbr(i)]);
+            options.xaxis.ticks.push([i +.3,protectedInfo.dayOfWeekName(i)]);
         }
 
         return options;

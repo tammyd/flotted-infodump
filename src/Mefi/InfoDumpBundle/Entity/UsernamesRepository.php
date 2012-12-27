@@ -36,9 +36,14 @@ SQL;
 
     public function getCountSignupsByYear()
     {
-        $conn = $this->getEntityManager()->getConnection();
         $sql = "select count(*) as count, year(joindate) as date from usernames group by date order by date asc";
-        return $conn->fetchAll($sql);
+
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('date', 'date', 'integer');
+        $rsm->addScalarResult('count', 'count', 'integer');
+        $em = $this->getEntityManager();
+        $query = $em->createNativeQuery($sql, $rsm);
+        return $query->getResult();
     }
 
     public function getCountSignupsByDayOfWeek() {
