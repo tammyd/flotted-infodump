@@ -68,6 +68,12 @@ class UsernamesController extends JsonDataController
         return $this->jsonResponse($data);
     }
 
+    public function signupsByHourDataAction() {
+        $em = $this->getDoctrine()->getManager();
+        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByHour();
+        return $this->jsonResponse($all);
+    }
+
     public function signupsByDateContentAction() {
         return new Response("<p class='lead'>Signups By Date</p>");
     }
@@ -82,5 +88,9 @@ class UsernamesController extends JsonDataController
 
     public function signupsByDOWContentAction() {
         return new Response("<p class='lead'>Signups By Day Of Week</p>");
+    }
+
+    public function signupsByHourContentAction() {
+        return new Response("<p class='lead'>Signups By Hour (PST?)</p>");
     }
 }

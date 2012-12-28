@@ -49,4 +49,17 @@ var signupsByDOW = (function() {
     return thisGraph;
 });
 
+var signupsByHour = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByHourChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " signups"
+    }
+
+    return thisGraph;
+});
+
+
 

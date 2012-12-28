@@ -2,36 +2,36 @@
 
 namespace Mefi\InfoDumpBundle\Entity\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Mefi\InfoDumpBundle\Entity\Repository\InfodumpRepository;
 
 class UsernamesRepository extends InfodumpRepository
 {
+    const DATE_FIELD = 'joindate';
 
     public function getCountSignupsByDate()
     {
-
-        return $this->getCountByDate('joindate');
-
+        return $this->getCountByDate(self::DATE_FIELD);
     }
 
     public function getCountSignupsByMonth()
     {
 
-        return $this->getCountByMonthYear('joindate');
+        return $this->getCountByMonthYear(self::DATE_FIELD);
     }
 
     public function getCountSignupsByYear()
     {
-        return $this->getCountByYear('joindate');
+        return $this->getCountByYear(self::DATE_FIELD);
     }
 
-    public function getCountSignupsByDayOfWeek() {
+    public function getCountSignupsByDayOfWeek()
+    {
+        return $this->getCountByYearDayOfWeek(self::DATE_FIELD);
+    }
 
-
-        return $this->getCountByYearDayOfWeek('joindate');
-
+    public function getCountSignupsByHour()
+    {
+        return $this->getCountByHour(self::DATE_FIELD);
     }
 
 }

@@ -89,4 +89,16 @@ class AskMePostsController extends JsonDataController
         $data = $this->normalize2DData($data);
         return $this->jsonResponse($data);
     }
+
+
+    public function postsByHourDataAction() {
+        $em = $this->getDoctrine()->getManager();
+        $all = $em->getRepository('MefiInfoDumpBundle:PostdataAskme')->getCountPostsByHour();
+        return $this->jsonResponse($all);
+    }
+
+    public function postsByHourContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Hour (PST?)</p>");
+    }
+
 }

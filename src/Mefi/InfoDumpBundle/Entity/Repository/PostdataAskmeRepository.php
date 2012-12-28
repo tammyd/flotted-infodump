@@ -28,4 +28,10 @@ class PostdataAskmeRepository extends InfodumpRepository
         return $this->getCountByYearDayOfWeek(self::DATE_FIELD);
     }
 
+    public function getCountPostsByHour()
+    {
+        return $this->getCountByHour(self::DATE_FIELD);
+    }
+
+
 }

@@ -54,6 +54,19 @@ askPostsByYear_content:
     defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByYearContent }
     options:
       expose: true
+      
+askPostsByHour_data:
+    pattern: /_home/askPostsByHour/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByHourData }
+    options:
+      expose: true
+
+askPostsByHour_content:
+    pattern: /_home/askPostsByHour/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByHourContent }
+    options:
+      expose: true
+
 
 
 home_content:
@@ -71,6 +84,18 @@ signupsByDate_content:
 signupsByDate_data:
     pattern: /_home/signupsByDate/data
     defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDateData}
+    options:
+      expose: true
+      
+signupsByHour_content:
+    pattern: /_home/signupsByHour/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByHourContent }
+    options:
+      expose: true
+
+signupsByHour_data:
+    pattern: /_home/signupsByHour/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByHourData}
     options:
       expose: true
       

@@ -321,3 +321,72 @@ var countByDOWChart = (function(protectedInfo) {
     }
 
 });
+
+var countByHourChart  = (function(protectedInfo) {
+
+    protectedInfo = protectedInfo || {};
+    var thisGraph = flotChartDisplay(protectedInfo);
+
+    var displayHour = function(hour) {
+        var pm = " PM";
+        var am = " AM";
+        if (hour==0) {
+            return "12"+am;
+        } else if (hour <12) {
+            return hour+am;
+        } else if (hour==12) {
+            return hour+pm;
+        } else {
+            return (hour -12)+pm;
+        }
+    };
+
+    protectedInfo.prepData = function(jsonData) {
+
+        var data = [];
+        for (i=0; i<jsonData.length;i++) {
+            var obj = jsonData[i]
+
+            //theres something funky with datejs and it's timezones.
+            //Added -8 to hour to account these times are all in PST.
+            data.push([obj.hour, obj.count]);
+        }
+
+        return [data];
+
+    };
+
+    protectedInfo.tooltipContent = function(item) {
+        var x = item.datapoint[0],
+            y = item.datapoint[1];
+
+        return displayHour(x) + ": " + y;
+
+    }
+
+    protectedInfo.getOptions = function() {
+
+        var opt = thisGraph.getOptions();
+        var options = $.extend(true, {}, opt, {
+            lines: { show: true },
+            points: { show: true },
+            xaxis: { ticks: [] }
+        });
+
+        for (i=0;i<24;i++) {
+            options.xaxis.ticks.push([i, displayHour(i)]);
+        }
+
+
+        return options;
+    };
+
+    //TODO: Fix this as well, see countByDateChart
+    return {
+        show:protectedInfo.showGraph,
+        hideTooltip: protectedInfo.hideTooltip,
+        getOptions: protectedInfo.getOptions,
+        tooltipContent: protectedInfo.tooltipContent
+    }
+
+});

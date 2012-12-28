@@ -56,8 +56,8 @@ SQL;
             ->getResult();
     }
 
-    public function getCountByYearDayOfWeek($dateField) {
-
+    public function getCountByYearDayOfWeek($dateField)
+    {
         $table = $this->getClassMetadata()->getTableName();
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('dow', 'dow', 'integer');
@@ -65,6 +65,19 @@ SQL;
         $rsm->addScalarResult('year', 'year', 'integer');
         $sql = "SELECT COUNT( * ) AS count, year($dateField) as year, DAYOFWEEK( $dateField ) AS dow FROM $table GROUP BY year,dow ORDER BY year asc, dow ASC ";
 
+        $result = $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+            ->getResult();
+        return $result;
+    }
+
+    public function getCountByHour($datefield)
+    {
+        $table = $this->getClassMetadata()->getTableName();
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('hour', 'hour', 'integer');
+        $rsm->addScalarResult('count', 'count', 'integer');
+        $sql = "select count(*) as count, hour($datefield) as hour from $table group by hour order by hour asc;";
         $result = $this->getEntityManager()
             ->createNativeQuery($sql, $rsm)
             ->getResult();

@@ -46,3 +46,15 @@ var askPostsByDOW = (function() {
     return thisGraph;
 });
 
+var askPostsByHour = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByHourChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " posts"
+    }
+
+    return thisGraph;
+});
+
