@@ -31,12 +31,12 @@ $(document).ready(function()
         $loader.hide();
     });
 
-    $('ul.report-menu > li > a').click(function() {
+    $('ul.report-menu li a').click(function() {
         hidePage();
         clearPage();
 
-        $('ul.report-menu > li.active').removeClass('active');
-        $(this).parent().addClass('active');
+        $('ul.report-menu  li.active').removeClass('active');
+        $(this).parent('li').addClass('active');
 
 
         var dataRoute = $(this).data('data');

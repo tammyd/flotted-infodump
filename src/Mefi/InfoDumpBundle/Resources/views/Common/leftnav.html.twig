@@ -1,15 +1,41 @@
 <div class="well sidebar-nav">
   <ul class="report-menu nav nav-list">
-    <li class='active'><a href="#" data-content="home_content">What's This?</a></li>
-    <li class="nav-header">Sign Ups</li>
-    <li><a href="#" data-data="signupsByDate_data"  data-content="signupsByDate_content"  data-display='signupsByDate'>Totals By Date</a></li>
-    <li><a href="#" data-data="signupsByYear_data"  data-content="signupsByYear_content"  data-display='signupsByYear'>Totals By Year</a></li>
-    <li><a href="#" data-data="signupsByMonth_data"  data-content="signupsByMonth_content"  data-display='signupsByMonth'>Totals By Month</a></li>
-    <li><a href="#" data-data="signupsByDOW_data"  data-content="signupsByDOW_content"  data-display='signupsByDOW'>Totals By Day of Week</a></li>
-    <li class="nav-header">AskMe</li>
-    <li><a href="#" data-data="askPostsByDate_data"  data-content="askPostsByDate_content"  data-display='askPostsByDate'>Posts By Date</a></li>
-    <li><a href="#" data-data="askPostsByYear_data"  data-content="askPostsByYear_content"  data-display='askPostsByYear'>Posts By Year</a></li>
-    <li><a href="#" data-data="askPostsByMonth_data"  data-content="askPostsByMonth_content"  data-display='askPostsByMonth'>Posts By Month</a></li>
-    <li><a href="#" data-data="askPostsByDOW_data"  data-content="askPostsByDOW_content"  data-display='askPostsByDOW'>Posts By Day Of Week</a></li>
+    <li class='active'><a href="#" class='load-content' data-content="home_content">What's This?</a></li>
   </ul>
+  <div class="accordion" id="accordion">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse"  href="#collapseOne">
+          User Names and Registrations
+        </a>
+      </div>
+      <div id="collapseOne" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <ul class="report-menu nav nav-list">
+            <li><a href="#" class='load-content' data-data="signupsByDate_data"  data-content="signupsByDate_content"  data-display='signupsByDate'>Totals By Date</a></li>
+            <li><a href="#" class='load-content' data-data="signupsByYear_data"  data-content="signupsByYear_content"  data-display='signupsByYear'>Totals By Year</a></li>
+            <li><a href="#" class='load-content' data-data="signupsByMonth_data"  data-content="signupsByMonth_content"  data-display='signupsByMonth'>Totals By Month</a></li>
+            <li><a href="#" class='load-content' data-data="signupsByDOW_data"  data-content="signupsByDOW_content"  data-display='signupsByDOW'>Totals By Day of Week</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse"  href="#collapseTwo">
+          AskMe
+        </a>
+      </div>
+      <div id="collapseTwo" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <ul class="report-menu nav nav-list">
+            <li><a href="#" data-data="askPostsByDate_data"  data-content="askPostsByDate_content"  data-display='askPostsByDate'>Posts By Date</a></li>
+            <li><a href="#" data-data="askPostsByYear_data"  data-content="askPostsByYear_content"  data-display='askPostsByYear'>Posts By Year</a></li>
+            <li><a href="#" data-data="askPostsByMonth_data"  data-content="askPostsByMonth_content"  data-display='askPostsByMonth'>Posts By Month</a></li>
+            <li><a href="#" data-data="askPostsByDOW_data"  data-content="askPostsByDOW_content"  data-display='askPostsByDOW'>Posts By Day Of Week</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div><!--/.well -->
