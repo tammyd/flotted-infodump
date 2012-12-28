@@ -74,6 +74,7 @@ $(document).ready(function()
 
     });
 
-    $('ul.report-menu > li.active > a').trigger('click');
+    timer && clearTimeout(timer);
+    $loader.hide();
 
 });
