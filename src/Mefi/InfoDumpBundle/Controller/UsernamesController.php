@@ -2,10 +2,7 @@
 
 namespace Mefi\InfoDumpBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
-
 
 class UsernamesController extends JsonDataController
 {
@@ -15,12 +12,7 @@ class UsernamesController extends JsonDataController
         $em = $this->getDoctrine()->getManager();
         $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByDate();
 
-        $response = new Response(json_encode($all));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-
-
+        return $this->jsonResponse($all);
     }
 
     public function signupsByYearDataAction() {
@@ -29,7 +21,6 @@ class UsernamesController extends JsonDataController
         $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByYear();
 
         return $this->jsonResponse($all);
-
 
     }
 

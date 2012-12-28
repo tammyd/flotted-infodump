@@ -1,20 +1,17 @@
 <?php
 
-namespace Mefi\InfoDumpBundle\Entity;
+namespace Mefi\InfoDumpBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use  Doctrine\ORM\Query\ResultSetMapping;
 
-class UsernamesRepository extends EntityRepository
+abstract class InfodumpRepository extends EntityRepository
 {
 
-    private function dowToString($i) {
-        return date('D', strtotime("Saturday +{$i} days"));
-    }
-
-    public function getCountSignupsByDate()
+    public function getCountByDate($dateField)
     {
-        $sql = "select count(*) as count, date(joindate) as date from usernames group by date order by date asc";
+        $table = $this->getClassMetadata()->getTableName();
+        $sql = "select count(*) as count, date($dateField) as date from $table group by date order by date asc";
 
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('date', 'date', 'string');
@@ -25,12 +22,12 @@ class UsernamesRepository extends EntityRepository
 
     }
 
-    public function getCountSignupsByMonth()
+    public function getCountByMonthYear($dateField)
     {
-
+        $table = $this->getClassMetadata()->getTableName();
         $sql = <<<SQL
-SELECT COUNT( * ) AS count, month(joindate) as month, year(joindate) as year
-FROM usernames
+SELECT COUNT( * ) AS count, month($dateField) as month, year($dateField) as year
+FROM $table
 GROUP BY month,year
 ORDER BY year asc, month asc
 SQL;
@@ -45,9 +42,10 @@ SQL;
             ->getResult();
     }
 
-    public function getCountSignupsByYear()
+    public function getCountByYear($dateField)
     {
-        $sql = "select count(*) as count, year(joindate) as date from usernames group by date order by date asc";
+        $table = $this->getClassMetadata()->getTableName();
+        $sql = "select count(*) as count, year($dateField) as date from $table group by date order by date asc";
 
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('date', 'date', 'integer');
@@ -58,21 +56,19 @@ SQL;
             ->getResult();
     }
 
-    public function getCountSignupsByDayOfWeek() {
+    public function getCountByYearDayOfWeek($dateField) {
 
-        $rsm = new ResultSetMapping(); //Apparently using raw sql with the connection object isn't very doctrinific, this is the 'right' way.
+        $table = $this->getClassMetadata()->getTableName();
+        $rsm = new ResultSetMapping();
         $rsm->addScalarResult('dow', 'dow', 'integer');
         $rsm->addScalarResult('count', 'count', 'integer');
         $rsm->addScalarResult('year', 'year', 'integer');
-        $sql = "SELECT COUNT( * ) AS count, year(joindate) as year, DAYOFWEEK( joindate ) AS dow FROM usernames GROUP BY year,dow ORDER BY year asc, dow ASC ";
+        $sql = "SELECT COUNT( * ) AS count, year($dateField) as year, DAYOFWEEK( $dateField ) AS dow FROM $table GROUP BY year,dow ORDER BY year asc, dow ASC ";
 
         $result = $this->getEntityManager()
             ->createNativeQuery($sql, $rsm)
             ->getResult();
-
-        $result = array_map(function ($r)  { $r['dayOfWeek']=$this->dowToString($r['dow']); return $r; }, $result);
         return $result;
-
     }
 
 }

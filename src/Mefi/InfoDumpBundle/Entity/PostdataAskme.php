@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Mefi\InfoDumpBundle\Entity\PostdataAskme
  *
  * @ORM\Table(name="postdata_askme")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Mefi\InfoDumpBundle\Entity\Repository\PostdataAskmeRepository")
  */
 class PostdataAskme
 {

@@ -6,6 +6,56 @@ home_tester:
   pattern: /_home/tester/{graph}
   defaults: {_controller: MefiInfoDumpBundle:Home:tester }
 
+askPostsByDate_data:
+    pattern: /_home/askPostsByDate/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDateData }
+    options:
+      expose: true
+
+askPostsByDate_content:
+    pattern: /_home/askPostsByDate/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDateContent }
+    options:
+      expose: true
+      
+askPostsByMonth_data:
+    pattern: /_home/askPostsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthData }
+    options:
+      expose: true
+
+askPostsByMonth_content:
+    pattern: /_home/askPostsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthContent }
+    options:
+      expose: true
+
+askPostsByDOW_data:
+    pattern: /_home/askPostsByDOW/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDOWData }
+    options:
+      expose: true
+
+askPostsByDOW_content:
+    pattern: /_home/askPostsByDOW/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDOWContent }
+    options:
+      expose: true
+      
+      
+askPostsByYear_data:
+    pattern: /_home/askPostsByYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByYearData }
+    options:
+      expose: true
+
+askPostsByYear_content:
+    pattern: /_home/askPostsByYear/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByYearContent }
+    options:
+      expose: true
+
+
 home_content:
   pattern: /home/content
   defaults: {_controller: MefiInfoDumpBundle:Home:content }

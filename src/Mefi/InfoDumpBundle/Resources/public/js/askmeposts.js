@@ -1,52 +1,48 @@
-
-
-
-var signupsByDate = (function() {
+var askPostsByDate = (function() {
 
     var protectedInfo = {};
     var thisGraph = countByDateChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return  thisGraph.tooltipContent(item) + " posts"
     }
 
     return thisGraph;
 });
 
-var signupsByYear = (function() {
+var askPostsByYear = (function() {
 
     var protectedInfo = {};
     var thisGraph = countByYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return  thisGraph.tooltipContent(item) + " posts"
     }
 
     return thisGraph;
 });
 
-var signupsByMonth = (function() {
+var askPostsByMonth = (function() {
 
     var protectedInfo = {};
     var thisGraph = countByMonthChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return  thisGraph.tooltipContent(item) + " posts"
     }
 
     return thisGraph;
 });
 
-var signupsByDOW = (function() {
+var askPostsByDOW = (function() {
 
     var protectedInfo = {};
     var thisGraph = countByDOWChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return  thisGraph.tooltipContent(item) + " posts"
     }
 
     return thisGraph;
 });
-
 
