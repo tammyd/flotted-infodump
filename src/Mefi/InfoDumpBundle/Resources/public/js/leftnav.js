@@ -32,6 +32,7 @@ $(document).ready(function()
     });
 
     $('ul.report-menu li a').click(function() {
+        $('#tooltip').remove();
         hidePage();
         clearPage();
 
