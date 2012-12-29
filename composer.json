@@ -54,7 +54,6 @@
         "jms/di-extra-bundle": "1.1.*",
         "kriswallsmith/assetic": "1.1.*@dev",
         "friendsofsymfony/jsrouting-bundle": "1.1.*@dev",
-        "twitter/bootstrap": "dev-master",
         "flot/flot": "dev-master",
         "elao/web-profiler-extra-bundle": "dev-master"
     },

@@ -1,5 +1,5 @@
 {
-    "hash": "beae664594e9d735f3588c699627b9d0",
+    "hash": "d58c020b29fb6a0a6169b1ecbdfda101",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1327,24 +1327,6 @@
             "keywords": [
                 "templating"
             ]
-        },
-        {
-            "name": "twitter/bootstrap",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twitter/bootstrap.git",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/twitter/bootstrap/zipball/master",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library",
-            "installation-source": "source",
-            "time": "2012-12-10 08:21:35"
         }
     ],
     "packages-dev": null,
@@ -1356,7 +1338,6 @@
         "twig/extensions": 20,
         "kriswallsmith/assetic": 20,
         "friendsofsymfony/jsrouting-bundle": 20,
-        "twitter/bootstrap": 20,
         "flot/flot": 20,
         "elao/web-profiler-extra-bundle": 20
     }
