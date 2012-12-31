@@ -34,6 +34,18 @@ var askPostsByMonth = (function() {
     return thisGraph;
 });
 
+var askDeletedPostsByMonth = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByMonthChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});
+
 var askPostsByDOW = (function() {
 
     var protectedInfo = {};

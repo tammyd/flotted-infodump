@@ -100,7 +100,7 @@ SQL;
         return $result;
     }
 
-    private function buildCacheKey($function, $args) {
+    protected function buildCacheKey($function, $args) {
         return $this->getCachePrefix().":".$function.":".md5(json_encode($args));
     }
 

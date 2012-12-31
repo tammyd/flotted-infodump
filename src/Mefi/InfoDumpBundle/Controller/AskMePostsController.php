@@ -101,4 +101,31 @@ class AskMePostsController extends JsonDataController
         return new Response("<p class='lead'>Number of AskMe Posts By Hour (PST?)</p>");
     }
 
+    public function deletedPostsByMonthContentAction() {
+        return new Response("<p class='lead'>Number of Deleted AskMe Posts By Month</p>");
+    }
+
+    public function deletedPostsByMonthDataAction() {
+
+        $all = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
+            ->getDeletedPostsByMonth();
+
+        $data = array();
+        foreach ($all as $record) {
+            $year = intval($record['year']);
+            $month = intval($record['month']);
+            $count = intval($record['count']);
+
+            if (!isset($data[$year])) {
+                $data[$year] = array();
+            }
+            $data[$year][$month] = intval($count);
+        }
+
+        $data = $this->normalize2DData($data);
+        return $this->jsonResponse($data);
+    }
+
 }

@@ -30,6 +30,18 @@ askPostsByMonth_content:
     options:
       expose: true
 
+askDeletedPostsByMonth_data:
+    pattern: /_home/askDeletedPostsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthData }
+    options:
+      expose: true
+
+askDeletedPostsByMonth_content:
+    pattern: /_home/askDeletedPostsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthContent }
+    options:
+      expose: true
+
 askPostsByDOW_data:
     pattern: /_home/askPostsByDOW/data
     defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDOWData }
