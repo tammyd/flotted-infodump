@@ -92,6 +92,7 @@ SQL;
         $sql = "select count(*) as count, hour($datefield) as hour from $table group by hour order by hour asc;";
 
         $cacheKey = $this->buildCacheKey(__FUNCTION__, $datefield);
+
         $result = $this->getEntityManager()
             ->createNativeQuery($sql, $rsm)
             ->useResultCache($cache, $cacheTime, $cacheKey)

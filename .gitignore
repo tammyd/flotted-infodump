@@ -18,3 +18,4 @@ app/config/parameters.yml
 .DS_Store
 
 src/Profiler
+web/apc.php

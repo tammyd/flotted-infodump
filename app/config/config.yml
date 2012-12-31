@@ -53,21 +53,10 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-        metadata_cache_driver:
-            type: memcache
-            host: "%memcache.host%"
-            port: "%memcache.port%"
-            instance_class: Memcache
-        result_cache_driver:
-            type: memcache
-            host: "%memcache.host%"
-            port: "%memcache.port%"
-            instance_class: Memcache
-        query_cache_driver:
-            type: memcache
-            host: "%memcache.host%"
-            port: "%memcache.port%"
-            instance_class: Memcache
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
+
 
 # Swiftmailer Configuration
 swiftmailer:
