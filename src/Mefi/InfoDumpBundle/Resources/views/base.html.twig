@@ -4,6 +4,8 @@
 {% endblock %}
 <head>
   {% block headcontent  %}
+    <title>{% block title %}metadata stuff{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     {% block stylesheets %}
       {% stylesheets  output="generated/infodump.css"
