@@ -1,0 +1,7 @@
+.sidebar-nav a [class^="icon-"], a [class*=" icon-"]  {
+    text-decoration: none;
+}
+
+[class^="icon-caret"], a [class*=" icon-caret"] {
+    width:14px;
+}

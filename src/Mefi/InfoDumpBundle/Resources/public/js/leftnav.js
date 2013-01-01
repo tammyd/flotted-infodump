@@ -75,6 +75,13 @@ $(document).ready(function()
 
     });
 
+    $('[class*="collapse"]').on('show', function () {
+        $(this).parent().find('i.icon-caret-right').removeClass('icon-caret-right').addClass('icon-caret-down');
+    })
+    $('[class*="collapse"]').on('hide', function () {
+        $(this).parent().find('i.icon-caret-down').removeClass('icon-caret-down').addClass('icon-caret-right');
+    })
+
     timer && clearTimeout(timer);
     $loader.hide();
 
