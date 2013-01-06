@@ -70,3 +70,15 @@ var askPostsByHour = (function() {
     return thisGraph;
 });
 
+var askPostsByMonth = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByMonthChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " posts"
+    }
+
+    return thisGraph;
+});
+

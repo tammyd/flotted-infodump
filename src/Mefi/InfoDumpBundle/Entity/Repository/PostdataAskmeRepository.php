@@ -60,5 +60,9 @@ SQL;
             ->getResult();
     }
 
+    public function findCountByMonth() {
+        return $this->getCountByMonth(self::DATE_FIELD);
+    }
+
 
 }

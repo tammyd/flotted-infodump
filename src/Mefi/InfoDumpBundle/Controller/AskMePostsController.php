@@ -130,4 +130,18 @@ class AskMePostsController extends JsonDataController
         return $this->jsonResponse($data);
     }
 
+
+    public function postsByMonthDataAction() {
+        $result = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
+            ->findCountByMonth();
+
+        return $this->jsonResponse($result);
+    }
+
+    public function postsByMonthContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Month</p>");
+    }
+
 }
