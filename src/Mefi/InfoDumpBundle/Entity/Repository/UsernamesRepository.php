@@ -8,30 +8,34 @@ class UsernamesRepository extends InfodumpRepository
 {
     const DATE_FIELD = 'joindate';
 
-    public function getCountSignupsByDate()
+    public function findCountSignupsByDate()
     {
         return $this->getCountByDate(self::DATE_FIELD);
     }
 
-    public function getCountSignupsByMonth()
+    public function findCountSignupsByMonthYear()
     {
 
         return $this->getCountByMonthYear(self::DATE_FIELD);
     }
 
-    public function getCountSignupsByYear()
+    public function findCountSignupsByYear()
     {
         return $this->getCountByYear(self::DATE_FIELD);
     }
 
-    public function getCountSignupsByDayOfWeek()
+    public function findCountSignupsByDayOfWeek()
     {
         return $this->getCountByYearDayOfWeek(self::DATE_FIELD);
     }
 
-    public function getCountSignupsByHour()
+    public function findCountSignupsByHour()
     {
         return $this->getCountByHour(self::DATE_FIELD);
+    }
+
+    public function findCountByMonth() {
+        return $this->getCountByMonth(self::DATE_FIELD);
     }
 
 }

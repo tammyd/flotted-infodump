@@ -18,27 +18,27 @@ askPostsByDate_content:
     options:
       expose: true
       
-askPostsByMonth_data:
-    pattern: /_home/askPostsByMonth/data
-    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthData }
+askPostsByMonthYear_data:
+    pattern: /_home/askPostsByMonthYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthYearData }
     options:
       expose: true
 
-askPostsByMonth_content:
+askPostsByMonthYear_content:
     pattern: /_home/askPostsByMonth/content
-    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthContent }
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthYearContent }
     options:
       expose: true
 
-askDeletedPostsByMonth_data:
-    pattern: /_home/askDeletedPostsByMonth/data
-    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthData }
+askDeletedPostsByMonthYear_data:
+    pattern: /_home/askDeletedPostsByMonthYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearData }
     options:
       expose: true
 
-askDeletedPostsByMonth_content:
-    pattern: /_home/askDeletedPostsByMonth/content
-    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthContent }
+askDeletedPostsByMonthYear_content:
+    pattern: /_home/askDeletedPostsByMonthYear/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearContent }
     options:
       expose: true
 
@@ -111,15 +111,15 @@ signupsByHour_data:
     options:
       expose: true
       
-signupsByMonth_content:
-    pattern: /_home/signupsByMonth/content
-    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthContent }
+signupsByMonthYear_content:
+    pattern: /_home/signupsByMonthYear/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthYearContent }
     options:
       expose: true
 
-signupsByMonth_data:
-    pattern: /_home/signupsByMonth/data
-    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthData}
+signupsByMonthYear_data:
+    pattern: /_home/signupsByMonthYear/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthYearData}
     options:
       expose: true
 
@@ -144,6 +144,18 @@ signupsByDOW_content:
 signupsByDOW_data:
     pattern: /_home/signupsByDOW/data
     defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDOWData}
+    options:
+      expose: true
+
+signupsByMonth_content:
+    pattern: /_home/signupsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthContent }
+    options:
+      expose: true
+
+signupsByMonth_data:
+    pattern: /_home/signupsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthData}
     options:
       expose: true
 

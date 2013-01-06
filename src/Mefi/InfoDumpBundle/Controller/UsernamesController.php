@@ -10,7 +10,7 @@ class UsernamesController extends JsonDataController
     public function signupsByDateDataAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByDate();
+        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->findCountSignupsByDate();
 
         return $this->jsonResponse($all);
     }
@@ -18,17 +18,26 @@ class UsernamesController extends JsonDataController
     public function signupsByYearDataAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByYear();
+        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->findCountSignupsByYear();
 
         return $this->jsonResponse($all);
 
     }
 
-
     public function signupsByMonthDataAction() {
+        $result = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('MefiInfoDumpBundle:Usernames')
+            ->findCountByMonth();
+
+        return $this->jsonResponse($result);
+    }
+
+
+    public function signupsByMonthYearDataAction() {
 
         $em = $this->getDoctrine()->getManager();
-        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByMonth();
+        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->findCountSignupsByMonthYear();
 
         $data = array();
         foreach ($all as $record) {
@@ -50,7 +59,7 @@ class UsernamesController extends JsonDataController
         $arrData = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->getCountSignupsByDayOfWeek();
+            ->findCountSignupsByDayOfWeek();
 
         $data = array();
         foreach ($arrData as $record) {
@@ -70,7 +79,7 @@ class UsernamesController extends JsonDataController
 
     public function signupsByHourDataAction() {
         $em = $this->getDoctrine()->getManager();
-        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->getCountSignupsByHour();
+        $all = $em->getRepository('MefiInfoDumpBundle:Usernames')->findCountSignupsByHour();
         return $this->jsonResponse($all);
     }
 
@@ -78,8 +87,8 @@ class UsernamesController extends JsonDataController
         return new Response("<p class='lead'>Signups By Date</p>");
     }
 
-    public function signupsByMonthContentAction() {
-        return new Response("<p class='lead'>Signups By Month</p>");
+    public function signupsByMonthYearContentAction() {
+        return new Response("<p class='lead'>Signups By Month & Year</p>");
     }
 
     public function signupsByYearContentAction() {
@@ -92,5 +101,9 @@ class UsernamesController extends JsonDataController
 
     public function signupsByHourContentAction() {
         return new Response("<p class='lead'>Signups By Hour (PST?)</p>");
+    }
+
+    public function signupsByMonthContentAction() {
+        return new Response("<p class='lead'>Signups By Month</p>");
     }
 }

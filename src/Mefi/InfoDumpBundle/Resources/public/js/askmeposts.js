@@ -22,10 +22,10 @@ var askPostsByYear = (function() {
     return thisGraph;
 });
 
-var askPostsByMonth = (function() {
+var askPostsByMonthYear = (function() {
 
     var protectedInfo = {};
-    var thisGraph = countByMonthChart(protectedInfo);
+    var thisGraph = countByMonthYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
         return  thisGraph.tooltipContent(item) + " posts"
@@ -34,10 +34,10 @@ var askPostsByMonth = (function() {
     return thisGraph;
 });
 
-var askDeletedPostsByMonth = (function() {
+var askDeletedPostsByMonthYear = (function() {
 
     var protectedInfo = {};
-    var thisGraph = countByMonthChart(protectedInfo);
+    var thisGraph = countByMonthYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
         return  thisGraph.tooltipContent(item) + " deleted posts"

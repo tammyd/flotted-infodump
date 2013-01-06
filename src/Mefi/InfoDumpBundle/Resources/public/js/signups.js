@@ -25,10 +25,10 @@ var signupsByYear = (function() {
     return thisGraph;
 });
 
-var signupsByMonth = (function() {
+var signupsByMonthYear = (function() {
 
     var protectedInfo = {};
-    var thisGraph = countByMonthChart(protectedInfo);
+    var thisGraph = countByMonthYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
         return  thisGraph.tooltipContent(item) + " signups"
@@ -53,6 +53,18 @@ var signupsByHour = (function() {
 
     var protectedInfo = {};
     var thisGraph = countByHourChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " signups"
+    }
+
+    return thisGraph;
+});
+
+var signupsByMonth = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByMonthChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
         return  thisGraph.tooltipContent(item) + " signups"

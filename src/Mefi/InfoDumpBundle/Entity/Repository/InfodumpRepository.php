@@ -28,6 +28,23 @@ abstract class InfodumpRepository extends EntityRepository
 
     }
 
+
+    public function getCountByMonth($dateField, $cache=true, $cacheTime=3600)
+    {
+        $table = $this->getClassMetadata()->getTableName();
+        $sql = "select count(*) as count, CONCAT_WS('-',year($dateField), LPAD(month($dateField), 2, '0')) as date from $table group by date order by date asc";
+
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('date', 'date', 'string');
+        $rsm->addScalarResult('count', 'count', 'integer');
+
+        $cacheKey = $this->buildCacheKey(__FUNCTION__, $dateField);
+        return $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+            ->useResultCache($cache, $cacheTime, $cacheKey)
+            ->getResult();
+    }
+
     public function getCountByMonthYear($dateField, $cache=true, $cacheTime=3600)
     {
         $table = $this->getClassMetadata()->getTableName();

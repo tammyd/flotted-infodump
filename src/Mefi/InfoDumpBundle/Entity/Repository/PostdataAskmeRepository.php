@@ -14,7 +14,7 @@ class PostdataAskmeRepository extends InfodumpRepository
         return $this->getCountByDate(self::DATE_FIELD);
     }
 
-    public function getCountPostsByMonth()
+    public function getCountPostsByMonthYear()
     {
         return $this->getCountByMonthYear(self::DATE_FIELD);
     }
@@ -34,7 +34,7 @@ class PostdataAskmeRepository extends InfodumpRepository
         return $this->getCountByHour(self::DATE_FIELD);
     }
 
-    public function getDeletedPostsByMonth()
+    public function getDeletedPostsByMonthYear()
     {
 
         $table = $this->getClassMetadata()->getTableName();

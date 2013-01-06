@@ -210,7 +210,7 @@ var countByYearChart  = (function(protectedInfo) {
 
 });
 
-var countByMonthChart = (function(protectedInfo) {
+var countByMonthYearChart = (function(protectedInfo) {
 
     protectedInfo = protectedInfo || {};
     var thisGraph = flotChartDisplay(protectedInfo);
@@ -389,4 +389,49 @@ var countByHourChart  = (function(protectedInfo) {
         tooltipContent: protectedInfo.tooltipContent
     }
 
+});
+
+var countByMonthChart = (function(protectedInfo) {
+    protectedInfo = protectedInfo || {};
+    var thisGraph = flotChartDisplay(protectedInfo);
+
+    protectedInfo.prepData = function(jsonData) {
+        var data = [];
+        for (i=0; i<jsonData.length;i++) {
+            var obj = jsonData[i]
+            data.push([Date.parse(obj.date).getTime(), obj.count]);
+        }
+
+        return [data];
+
+    };
+
+    protectedInfo.tooltipContent = function(item) {
+        var x = item.datapoint[0],
+            y = item.datapoint[1];
+        var s = new Date(x).toDateString() + ": " + y
+        //this is such a hack! There should be an easier way for date string manipulation, but whatevs...
+        return s.replace(' 01', '').substr(4);
+    }
+
+    protectedInfo.getOptions = function() {
+
+        var opt = thisGraph.getOptions();
+        var options = $.extend(true, {}, opt, {
+            lines: { show: true },
+            points: { show: true },
+            xaxis: { mode: "time", minTickSize: [1, 'month'], tickDecimals: 0}
+        });
+
+        return options;
+    };
+
+    //Returning thisGraph doesn't get the correct tooltip content. This does,
+    //but is horrible. TODO: fix this.
+    return {
+        show:protectedInfo.showGraph,
+        hideTooltip: protectedInfo.hideTooltip,
+        getOptions: protectedInfo.getOptions,
+        tooltipContent: protectedInfo.tooltipContent
+    }
 });
