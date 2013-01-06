@@ -8,7 +8,7 @@ use Mefi\InfoDumpBundle\Entity\Repository\InfodumpRepository;
 class CommentdataAskmeRepository extends InfodumpRepository
 {
 
-    public function getCountCommentsByDate()
+    public function findCountCommentsByDate()
     {
         return $this->getByDate('datestamp');
 

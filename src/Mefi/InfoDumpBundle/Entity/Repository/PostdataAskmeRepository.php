@@ -9,32 +9,32 @@ class PostdataAskmeRepository extends InfodumpRepository
 {
     const DATE_FIELD = 'datestamp';
 
-    public function getCountPostsByDate()
+    public function findCountPostsByDate()
     {
         return $this->getCountByDate(self::DATE_FIELD);
     }
 
-    public function getCountPostsByMonthYear()
+    public function findCountPostsByMonthYear()
     {
         return $this->getCountByMonthYear(self::DATE_FIELD);
     }
 
-    public function getCountPostsByYear()
+    public function findCountPostsByYear()
     {
         return $this->getCountByYear(self::DATE_FIELD);
     }
 
-    public function getCountPostsByDayOfWeek()
+    public function findCountPostsByDayOfWeek()
     {
         return $this->getCountByYearDayOfWeek(self::DATE_FIELD);
     }
 
-    public function getCountPostsByHour()
+    public function findCountPostsByHour()
     {
         return $this->getCountByHour(self::DATE_FIELD);
     }
 
-    public function getDeletedPostsByMonthYear()
+    public function findDeletedPostsByMonthYear()
     {
 
         $table = $this->getClassMetadata()->getTableName();

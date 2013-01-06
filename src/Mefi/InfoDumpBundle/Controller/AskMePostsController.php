@@ -15,7 +15,7 @@ class AskMePostsController extends JsonDataController
         $all = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->getCountPostsByDate();
+            ->findCountPostsByDate();
 
         return $this->jsonResponse($all);
     }
@@ -31,7 +31,7 @@ class AskMePostsController extends JsonDataController
         $all = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->getCountPostsByYear();
+            ->findCountPostsByYear();
 
         return $this->jsonResponse($all);
     }
@@ -46,7 +46,7 @@ class AskMePostsController extends JsonDataController
         $all = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->getCountPostsByMonthYear();
+            ->findCountPostsByMonthYear();
 
         $data = array();
         foreach ($all as $record) {
@@ -72,7 +72,7 @@ class AskMePostsController extends JsonDataController
         $arrData = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->getCountPostsByDayOfWeek();
+            ->findCountPostsByDayOfWeek();
 
         $data = array();
         foreach ($arrData as $record) {
@@ -92,8 +92,10 @@ class AskMePostsController extends JsonDataController
 
 
     public function postsByHourDataAction() {
-        $em = $this->getDoctrine()->getManager();
-        $all = $em->getRepository('MefiInfoDumpBundle:PostdataAskme')->getCountPostsByHour();
+        $all = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
+            ->findCountPostsByHour();
         return $this->jsonResponse($all);
     }
 
@@ -110,7 +112,7 @@ class AskMePostsController extends JsonDataController
         $all = $this->getDoctrine()
             ->getManager()
             ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->getDeletedPostsByMonthYear();
+            ->findDeletedPostsByMonthYear();
 
         $data = array();
         foreach ($all as $record) {
