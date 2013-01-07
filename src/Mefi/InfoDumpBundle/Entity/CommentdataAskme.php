@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  * Mefi\InfoDumpBundle\Entity\CommentdataAskme
  *
  * @ORM\Table(name="commentdata_askme")
- * @ORM\Entity(repositoryClass="Mefi\InfoDumpBundle\Entity\Repository\CommentdataAskmeRepository")
  */
 class CommentdataAskme
 {

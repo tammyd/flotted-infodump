@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  * Mefi\InfoDumpBundle\Entity\Usernames
  *
  * @ORM\Table(name="usernames")
- * @ORM\Entity(repositoryClass="Mefi\InfoDumpBundle\Entity\Repository\UsernamesRepository")
  */
 class Usernames
 {
