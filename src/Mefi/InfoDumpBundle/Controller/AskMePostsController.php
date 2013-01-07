@@ -6,84 +6,54 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AskMePostsController extends JsonDataController
 {
-    public function postsByDateContentAction() {
-        return new Response("<p class='lead'>Number of AskMe Posts By Date</p>");
-    }
+
 
     public function postsByDateDataAction() {
 
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findCountPostsByDate();
-
-        return $this->jsonResponse($all);
-    }
-
-
-
-    public function postsByYearContentAction() {
-        return new Response("<p class='lead'>Number of AskMe Posts By Year</p>");
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByDate('datestamp');
+        return $this->jsonResponse($data);
     }
 
     public function postsByYearDataAction() {
 
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findCountPostsByYear();
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByYear('datestamp');
+        return $this->jsonResponse($data);
 
-        return $this->jsonResponse($all);
-    }
-
-
-    public function postsByMonthYearContentAction() {
-        return new Response("<p class='lead'>Number of AskMe Posts By Month & Year</p>");
     }
 
     public function postsByMonthYearDataAction() {
-
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findCountPostsByMonthYear();
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByMonthYear('datestamp');
 
         $data = array();
-        foreach ($all as $record) {
-            $year = intval($record['year']);
-            $month = intval($record['month']);
-            $count = intval($record['count']);
+        foreach ($rawData as $record) {
 
-            if (!isset($data[$year])) {
-                $data[$year] = array();
+            if (!isset($data[$record['year']])) {
+                $data[$record['year']] = array();
             }
-            $data[$year][$month] = intval($count);
+            $data[$record['year']][$record['month']] = intval($record['count']);
         }
 
         $data = $this->normalize2DData($data);
         return $this->jsonResponse($data);
     }
 
-    public function postsByDOWContentAction() {
-        return new Response("<p class='lead'>Number of AskMe Posts By Month</p>");
-    }
-
     public function postsByDOWDataAction() {
-        $arrData = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findCountPostsByDayOfWeek();
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByYearDayOfWeek('datestamp');
 
         $data = array();
-        foreach ($arrData as $record) {
-            $year = intval($record['year']);
-            $dow = intval($record['dow']);
-            $count = intval($record['count']);
-
-            if (!isset($data[$year])) {
-                $data[$year] = array();
+        foreach ($rawData as $record) {
+            if (!isset($data[$record['year']])) {
+                $data[$record['year']] = array();
             }
-            $data[$year][$dow] = $count;
+            $data[$record['year']][$record['dow']] = $record['count'];
         }
 
         $data = $this->normalize2DData($data);
@@ -92,19 +62,10 @@ class AskMePostsController extends JsonDataController
 
 
     public function postsByHourDataAction() {
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findCountPostsByHour();
-        return $this->jsonResponse($all);
-    }
-
-    public function postsByHourContentAction() {
-        return new Response("<p class='lead'>Number of AskMe Posts By Hour (PST?)</p>");
-    }
-
-    public function deletedPostsByMonthYearContentAction() {
-        return new Response("<p class='lead'>Number of Deleted AskMe Posts By Month & Year</p>");
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByHour('datestamp');
+        return $this->jsonResponse($data);
     }
 
     public function deletedPostsByMonthYearDataAction() {
@@ -130,18 +91,41 @@ class AskMePostsController extends JsonDataController
         return $this->jsonResponse($data);
     }
 
-
     public function postsByMonthDataAction() {
-        $result = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findCountByMonth();
 
-        return $this->jsonResponse($result);
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByMonth('datestamp');
+        return $this->jsonResponse($data);
     }
 
     public function postsByMonthContentAction() {
         return new Response("<p class='lead'>Number of AskMe Posts By Month</p>");
     }
+
+    public function postsByDateContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Date</p>");
+    }
+
+    public function postsByHourContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Hour (PST?)</p>");
+    }
+
+    public function deletedPostsByMonthYearContentAction() {
+        return new Response("<p class='lead'>Number of Deleted AskMe Posts By Month & Year</p>");
+    }
+
+    public function postsByYearContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Year</p>");
+    }
+
+    public function postsByDOWContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Month</p>");
+    }
+
+    public function postsByMonthYearContentAction() {
+        return new Response("<p class='lead'>Number of AskMe Posts By Month & Year</p>");
+    }
+
 
 }

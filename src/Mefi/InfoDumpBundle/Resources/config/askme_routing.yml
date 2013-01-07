@@ -1,0 +1,151 @@
+askPostsByDate_data:
+    pattern: /_home/askPostsByDate/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDateData }
+    options:
+      expose: true
+
+askPostsByDate_content:
+    pattern: /_home/askPostsByDate/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDateContent }
+    options:
+      expose: true
+
+askPostsByMonthYear_data:
+    pattern: /_home/askPostsByMonthYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthYearData }
+    options:
+      expose: true
+
+askPostsByMonthYear_content:
+    pattern: /_home/askPostsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthYearContent }
+    options:
+      expose: true
+
+
+askPostsByMonth_data:
+    pattern: /_home/askPostsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthData }
+    options:
+      expose: true
+
+askPostsByMonth_content:
+    pattern: /_home/askPostsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByMonthContent }
+    options:
+      expose: true
+
+askPostsByDOW_data:
+    pattern: /_home/askPostsByDOW/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDOWData }
+    options:
+      expose: true
+
+askPostsByDOW_content:
+    pattern: /_home/askPostsByDOW/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByDOWContent }
+    options:
+      expose: true
+
+
+askPostsByYear_data:
+    pattern: /_home/askPostsByYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByYearData }
+    options:
+      expose: true
+
+askPostsByYear_content:
+    pattern: /_home/askPostsByYear/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByYearContent }
+    options:
+      expose: true
+
+askPostsByHour_data:
+    pattern: /_home/askPostsByHour/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByHourData }
+    options:
+      expose: true
+
+askPostsByHour_content:
+    pattern: /_home/askPostsByHour/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:postsByHourContent }
+    options:
+      expose: true
+      
+      
+######     
+
+
+#askDeletedPostsByDate_data:
+#    pattern: /_home/askDeletedPostsByDate/data
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDateData }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByDate_content:
+#    pattern: /_home/askDeletedPostsByDate/content
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDateContent }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByMonthYear_data:
+#    pattern: /_home/askDeletedPostsByMonthYear/data
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearData }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByMonthYear_content:
+#    pattern: /_home/askDeletedPostsByMonth/content
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearContent }
+#    options:
+#      expose: true
+#
+#
+#askDeletedPostsByMonth_data:
+#    pattern: /_home/askDeletedPostsByMonth/data
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthData }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByMonth_content:
+#    pattern: /_home/askDeletedPostsByMonth/content
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthContent }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByDOW_data:
+#    pattern: /_home/askDeletedPostsByDOW/data
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDOWData }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByDOW_content:
+#    pattern: /_home/askDeletedPostsByDOW/content
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDOWContent }
+#    options:
+#      expose: true
+#
+#
+#askDeletedPostsByYear_data:
+#    pattern: /_home/askDeletedPostsByYear/data
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByYearData }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByYear_content:
+#    pattern: /_home/askDeletedPostsByYear/content
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByYearContent }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByHour_data:
+#    pattern: /_home/askDeletedPostsByHour/data
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByHourData }
+#    options:
+#      expose: true
+#
+#askDeletedPostsByHour_content:
+#    pattern: /_home/askDeletedPostsByHour/content
+#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByHourContent }
+#    options:
+#      expose: true

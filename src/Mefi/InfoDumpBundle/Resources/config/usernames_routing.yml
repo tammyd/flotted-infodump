@@ -1,0 +1,71 @@
+signupsByDate_content:
+    pattern: /_home/signupsByDate/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDateContent }
+    options:
+      expose: true
+
+signupsByDate_data:
+    pattern: /_home/signupsByDate/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDateData}
+    options:
+      expose: true
+
+signupsByHour_content:
+    pattern: /_home/signupsByHour/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByHourContent }
+    options:
+      expose: true
+
+signupsByHour_data:
+    pattern: /_home/signupsByHour/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByHourData}
+    options:
+      expose: true
+
+signupsByMonthYear_content:
+    pattern: /_home/signupsByMonthYear/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthYearContent }
+    options:
+      expose: true
+
+signupsByMonthYear_data:
+    pattern: /_home/signupsByMonthYear/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthYearData}
+    options:
+      expose: true
+
+signupsByYear_content:
+    pattern: /_home/signupsByYear/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByYearContent }
+    options:
+      expose: true
+
+signupsByYear_data:
+    pattern: /_home/signupsByYear/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByYearData}
+    options:
+      expose: true
+
+signupsByDOW_content:
+    pattern: /_home/signupsByDOW/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDOWContent }
+    options:
+      expose: true
+
+signupsByDOW_data:
+    pattern: /_home/signupsByDOW/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByDOWData}
+    options:
+      expose: true
+
+signupsByMonth_content:
+    pattern: /_home/signupsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthContent }
+    options:
+      expose: true
+
+signupsByMonth_data:
+    pattern: /_home/signupsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:Usernames:signupsByMonthData}
+    options:
+      expose: true
