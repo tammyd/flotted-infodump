@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @MefiInfoDumpBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -53,12 +54,18 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-        metadata_cache_driver: apc
+        metadata_cache_driver:
+             type:           memcache
+             host:           "%memcache.host%"
+             port:           "%memcache.port%"
         result_cache_driver:
             type:           memcache
             host:           "%memcache.host%"
             port:           "%memcache.port%"
-        query_cache_driver: apc
+        query_cache_driver:
+            type:           memcache
+            host:           "%memcache.host%"
+            port:           "%memcache.port%"
 
 
 # Swiftmailer Configuration

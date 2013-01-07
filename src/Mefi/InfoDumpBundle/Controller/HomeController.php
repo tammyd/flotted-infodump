@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function indexAction()
     {
+
         return $this->render('MefiInfoDumpBundle:Pages:home.html.twig');
     }
 

@@ -3,58 +3,50 @@
 namespace Mefi\InfoDumpBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Mefi\InfoDumpBundle\Data\UsernamesData;
 
 class UsernamesController extends JsonDataController
 {
 
+
     public function signupsByDateDataAction() {
 
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->findCountSignupsByDate();
-
-        return $this->jsonResponse($all);
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:Usernames')
+            ->getCountByDate('joindate');
+        return $this->jsonResponse($data);
     }
 
     public function signupsByYearDataAction() {
 
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->findCountSignupsByYear();
-
-        return $this->jsonResponse($all);
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:Usernames')
+            ->getCountByYear(UsernamesData::DATE_FIELD);
+        return $this->jsonResponse($data);
 
     }
 
     public function signupsByMonthDataAction() {
-        $result = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->findCountByMonth();
 
-        return $this->jsonResponse($result);
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:Usernames')
+            ->getCountByMonth(UsernamesData::DATE_FIELD);
+        return $this->jsonResponse($data);
     }
 
 
     public function signupsByMonthYearDataAction() {
-
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->findCountSignupsByMonthYear();
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:Usernames')
+            ->getCountByMonthYear(UsernamesData::DATE_FIELD);
 
         $data = array();
-        foreach ($all as $record) {
-            $year = intval($record['year']);
-            $month = intval($record['month']);
-            $count = intval($record['count']);
+        foreach ($rawData as $record) {
 
-            if (!isset($data[$year])) {
-                $data[$year] = array();
+            if (!isset($data[$record['year']])) {
+                $data[$record['year']] = array();
             }
-            $data[$year][$month] = intval($count);
+            $data[$record['year']][$record['month']] = intval($record['count']);
         }
 
         $data = $this->normalize2DData($data);
@@ -62,21 +54,16 @@ class UsernamesController extends JsonDataController
     }
 
     public function signupsByDOWDataAction() {
-        $arrData = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->findCountSignupsByDayOfWeek();
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:Usernames')
+            ->getCountByYearDayOfWeek(UsernamesData::DATE_FIELD);
 
         $data = array();
-        foreach ($arrData as $record) {
-            $year = intval($record['year']);
-            $dow = intval($record['dow']);
-            $count = intval($record['count']);
-
-            if (!isset($data[$year])) {
-                $data[$year] = array();
+        foreach ($rawData as $record) {
+            if (!isset($data[$record['year']])) {
+                $data[$record['year']] = array();
             }
-            $data[$year][$dow] = $count;
+            $data[$record['year']][$record['dow']] = $record['count'];
         }
 
         $data = $this->normalize2DData($data);
@@ -84,11 +71,10 @@ class UsernamesController extends JsonDataController
     }
 
     public function signupsByHourDataAction() {
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:Usernames')
-            ->findCountSignupsByHour();
-        return $this->jsonResponse($all);
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:Usernames')
+            ->getCountByHour(UsernamesData::DATE_FIELD);
+        return $this->jsonResponse($data);
     }
 
     public function signupsByDateContentAction() {
