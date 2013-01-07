@@ -68,23 +68,20 @@ class AskMePostsController extends JsonDataController
         return $this->jsonResponse($data);
     }
 
-    public function deletedPostsByMonthYearDataAction() {
 
-        $all = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('MefiInfoDumpBundle:PostdataAskme')
-            ->findDeletedPostsByMonthYear();
+    public function deletedPostsByMonthYearDataAction()
+    {
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByMonthYear('datestamp', 'deleted = 1');
 
         $data = array();
-        foreach ($all as $record) {
-            $year = intval($record['year']);
-            $month = intval($record['month']);
-            $count = intval($record['count']);
+        foreach ($rawData as $record) {
 
-            if (!isset($data[$year])) {
-                $data[$year] = array();
+            if (!isset($data[$record['year']])) {
+                $data[$record['year']] = array();
             }
-            $data[$year][$month] = intval($count);
+            $data[$record['year']][$record['month']] = intval($record['count']);
         }
 
         $data = $this->normalize2DData($data);
@@ -98,6 +95,7 @@ class AskMePostsController extends JsonDataController
             ->getCountByMonth('datestamp');
         return $this->jsonResponse($data);
     }
+
 
     public function postsByMonthContentAction() {
         return new Response("<p class='lead'>Number of AskMe Posts By Month</p>");

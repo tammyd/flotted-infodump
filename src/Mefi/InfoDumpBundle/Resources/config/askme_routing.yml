@@ -88,18 +88,18 @@ askPostsByHour_content:
 #    options:
 #      expose: true
 #
-#askDeletedPostsByMonthYear_data:
-#    pattern: /_home/askDeletedPostsByMonthYear/data
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearData }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByMonthYear_content:
-#    pattern: /_home/askDeletedPostsByMonth/content
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearContent }
-#    options:
-#      expose: true
-#
+askDeletedPostsByMonthYear_data:
+    pattern: /_home/askDeletedPostsByMonthYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearData }
+    options:
+      expose: true
+
+askDeletedPostsByMonthYear_content:
+    pattern: /_home/askDeletedPostsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearContent }
+    options:
+      expose: true
+
 #
 #askDeletedPostsByMonth_data:
 #    pattern: /_home/askDeletedPostsByMonth/data
