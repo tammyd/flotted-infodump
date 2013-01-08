@@ -69,6 +69,23 @@ class AskMePostsController extends JsonDataController
     }
 
 
+    public function postsByMonthDataAction() {
+
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByMonth('datestamp');
+        return $this->jsonResponse($data);
+    }
+
+    public function deletedPostsByMonthDataAction() {
+
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByMonth('datestamp', 'deleted = 1');
+        return $this->jsonResponse($data);
+    }
+
+
     public function deletedPostsByMonthYearDataAction()
     {
         $rawData = $this->get('infodump.singletable.data')
@@ -88,12 +105,66 @@ class AskMePostsController extends JsonDataController
         return $this->jsonResponse($data);
     }
 
-    public function postsByMonthDataAction() {
+    public function deletedPostsByHourDataAction() {
+        $data = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByHour('datestamp', 'deleted = 1');
+        return $this->jsonResponse($data);
+    }
+
+    public function deletedPostsByDOWDataAction() {
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByYearDayOfWeek('datestamp', 'deleted = 1');
+
+        $data = array();
+        foreach ($rawData as $record) {
+            if (!isset($data[$record['year']])) {
+                $data[$record['year']] = array();
+            }
+            $data[$record['year']][$record['dow']] = $record['count'];
+        }
+
+        $data = $this->normalize2DData($data);
+        return $this->jsonResponse($data);
+    }
+
+    static function cmpDates($a, $b) {
+        $adt = new \DateTime($a['date']);
+        $bdt = new \DateTime($b['date']);
+        return ($adt < $bdt) ? -1 : 1;
+    }
+
+    public function deletedPostsByDateDataAction() {
+
+        $rawData = $this->get('infodump.singletable.data')
+            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+            ->getCountByDate('datestamp', 'deleted = 1');
+
+        $dates = array_map(function($x) { return new \DateTime($x['date']); }, $rawData);
+        $interval = new \DateInterval('P1D');
+        $prev = null;
+        foreach ($dates as $date) {
+            $curr = $date;
+            if ($prev) {
+                $daterange = new \DatePeriod($prev, $interval ,$curr);
+                foreach ($daterange as $date) {
+                    $rawData[] = array('count'=>0, 'date'=>$date->format('Y-m-d'));
+                }
+            }
+            $prev = $curr->modify('+1 day');
+        }
+        usort($rawData, array("self", "cmpDates"));
+        return $this->jsonResponse($rawData);
+    }
+
+    public function deletedPostsByYearDataAction() {
 
         $data = $this->get('infodump.singletable.data')
             ->setClassName('MefiInfoDumpBundle:PostdataAskme')
-            ->getCountByMonth('datestamp');
+            ->getCountByYear('datestamp', 'deleted = 1');
         return $this->jsonResponse($data);
+
     }
 
 
@@ -109,10 +180,6 @@ class AskMePostsController extends JsonDataController
         return new Response("<p class='lead'>Number of AskMe Posts By Hour (PST?)</p>");
     }
 
-    public function deletedPostsByMonthYearContentAction() {
-        return new Response("<p class='lead'>Number of Deleted AskMe Posts By Month & Year</p>");
-    }
-
     public function postsByYearContentAction() {
         return new Response("<p class='lead'>Number of AskMe Posts By Year</p>");
     }
@@ -123,6 +190,30 @@ class AskMePostsController extends JsonDataController
 
     public function postsByMonthYearContentAction() {
         return new Response("<p class='lead'>Number of AskMe Posts By Month & Year</p>");
+    }
+
+    public function deletedPostsByMonthContentAction() {
+        return new Response("<p class='lead'>Number of Deleted Askme Posts By Month</p>");
+    }
+
+    public function deletedPostsByDateContentAction() {
+        return new Response("<p class='lead'>Number of Deleted Askme Posts By Date</p>");
+    }
+
+    public function deletedPostsByHourContentAction() {
+        return new Response("<p class='lead'>Number of Deleted Askme Posts By Hour (PST?)</p>");
+    }
+
+    public function deletedPostsByYearContentAction() {
+        return new Response("<p class='lead'>Number of Deleted Askme Posts By Year</p>");
+    }
+
+    public function deletedPostsByDOWContentAction() {
+        return new Response("<p class='lead'>Number of Deleted Askme Posts By Month</p>");
+    }
+
+    public function deletedPostsByMonthYearContentAction() {
+        return new Response("<p class='lead'>Number of Deleted Askme Posts By Month & Year</p>");
     }
 
 

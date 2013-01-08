@@ -22,10 +22,10 @@ var askPostsByYear = (function() {
     return thisGraph;
 });
 
-var askPostsByMonthYear = (function() {
+var askPostsByMonth = (function() {
 
     var protectedInfo = {};
-    var thisGraph = countByMonthYearChart(protectedInfo);
+    var thisGraph = countByMonthChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
         return  thisGraph.tooltipContent(item) + " posts"
@@ -34,17 +34,6 @@ var askPostsByMonthYear = (function() {
     return thisGraph;
 });
 
-var askDeletedPostsByMonthYear = (function() {
-
-    var protectedInfo = {};
-    var thisGraph = countByMonthYearChart(protectedInfo);
-
-    protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " deleted posts"
-    }
-
-    return thisGraph;
-});
 
 var askPostsByDOW = (function() {
 
@@ -70,10 +59,11 @@ var askPostsByHour = (function() {
     return thisGraph;
 });
 
-var askPostsByMonth = (function() {
+
+var askPostsByMonthYear = (function() {
 
     var protectedInfo = {};
-    var thisGraph = countByMonthChart(protectedInfo);
+    var thisGraph = countByMonthYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
         return  thisGraph.tooltipContent(item) + " posts"
@@ -82,3 +72,78 @@ var askPostsByMonth = (function() {
     return thisGraph;
 });
 
+/////
+
+var askDeletedPostsByDate = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByDateChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});
+
+var askDeletedPostsByYear = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByYearChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});
+
+var askDeletedPostsByMonth = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByMonthChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});
+
+
+var askDeletedPostsByDOW = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByDOWChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});
+
+var askDeletedPostsByHour = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByHourChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});
+
+
+var askDeletedPostsByMonthYear = (function() {
+
+    var protectedInfo = {};
+    var thisGraph = countByMonthYearChart(protectedInfo);
+
+    protectedInfo.tooltipContent = function(item) {
+        return  thisGraph.tooltipContent(item) + " deleted posts"
+    }
+
+    return thisGraph;
+});

@@ -76,18 +76,18 @@ askPostsByHour_content:
 ######     
 
 
-#askDeletedPostsByDate_data:
-#    pattern: /_home/askDeletedPostsByDate/data
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDateData }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByDate_content:
-#    pattern: /_home/askDeletedPostsByDate/content
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDateContent }
-#    options:
-#      expose: true
-#
+askDeletedPostsByDate_data:
+    pattern: /_home/askDeletedPostsByDate/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDateData }
+    options:
+      expose: true
+
+askDeletedPostsByDate_content:
+    pattern: /_home/askDeletedPostsByDate/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDateContent }
+    options:
+      expose: true
+
 askDeletedPostsByMonthYear_data:
     pattern: /_home/askDeletedPostsByMonthYear/data
     defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthYearData }
@@ -100,52 +100,52 @@ askDeletedPostsByMonthYear_content:
     options:
       expose: true
 
-#
-#askDeletedPostsByMonth_data:
-#    pattern: /_home/askDeletedPostsByMonth/data
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthData }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByMonth_content:
-#    pattern: /_home/askDeletedPostsByMonth/content
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthContent }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByDOW_data:
-#    pattern: /_home/askDeletedPostsByDOW/data
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDOWData }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByDOW_content:
-#    pattern: /_home/askDeletedPostsByDOW/content
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDOWContent }
-#    options:
-#      expose: true
-#
-#
-#askDeletedPostsByYear_data:
-#    pattern: /_home/askDeletedPostsByYear/data
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByYearData }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByYear_content:
-#    pattern: /_home/askDeletedPostsByYear/content
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByYearContent }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByHour_data:
-#    pattern: /_home/askDeletedPostsByHour/data
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByHourData }
-#    options:
-#      expose: true
-#
-#askDeletedPostsByHour_content:
-#    pattern: /_home/askDeletedPostsByHour/content
-#    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByHourContent }
-#    options:
-#      expose: true
+
+askDeletedPostsByMonth_data:
+    pattern: /_home/askDeletedPostsByMonth/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthData }
+    options:
+      expose: true
+
+askDeletedPostsByMonth_content:
+    pattern: /_home/askDeletedPostsByMonth/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByMonthContent }
+    options:
+      expose: true
+
+askDeletedPostsByDOW_data:
+    pattern: /_home/askDeletedPostsByDOW/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDOWData }
+    options:
+      expose: true
+
+askDeletedPostsByDOW_content:
+    pattern: /_home/askDeletedPostsByDOW/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByDOWContent }
+    options:
+      expose: true
+
+
+askDeletedPostsByYear_data:
+    pattern: /_home/askDeletedPostsByYear/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByYearData }
+    options:
+      expose: true
+
+askDeletedPostsByYear_content:
+    pattern: /_home/askDeletedPostsByYear/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByYearContent }
+    options:
+      expose: true
+
+askDeletedPostsByHour_data:
+    pattern: /_home/askDeletedPostsByHour/data
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByHourData }
+    options:
+      expose: true
+
+askDeletedPostsByHour_content:
+    pattern: /_home/askDeletedPostsByHour/content
+    defaults: { _controller: MefiInfoDumpBundle:AskMePosts:deletedPostsByHourContent }
+    options:
+      expose: true
