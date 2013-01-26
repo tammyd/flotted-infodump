@@ -1,5 +1,11 @@
 
+var signups = (function() {
 
+    return {
+        desc: 'signup',
+        plural: 'signups'
+    }
+});
 
 var signupsByDate = (function() {
 
@@ -7,7 +13,7 @@ var signupsByDate = (function() {
     var thisGraph = countByDateChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return thisGraph.tooltipContent(item, signups().desc, signups().plural)
     }
 
     return thisGraph;
@@ -19,7 +25,7 @@ var signupsByYear = (function() {
     var thisGraph = countByYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return thisGraph.tooltipContent(item, signups().desc, signups().plural)
     }
 
     return thisGraph;
@@ -31,7 +37,7 @@ var signupsByMonthYear = (function() {
     var thisGraph = countByMonthYearChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return thisGraph.tooltipContent(item, signups().desc, signups().plural)
     }
 
     return thisGraph;
@@ -43,7 +49,7 @@ var signupsByDOW = (function() {
     var thisGraph = countByDOWChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return thisGraph.tooltipContent(item, signups().desc, signups().plural)
     }
 
     return thisGraph;
@@ -55,7 +61,7 @@ var signupsByHour = (function() {
     var thisGraph = countByHourChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return thisGraph.tooltipContent(item, signups().desc, signups().plural)
     }
 
     return thisGraph;
@@ -67,7 +73,7 @@ var signupsByMonth = (function() {
     var thisGraph = countByMonthChart(protectedInfo);
 
     protectedInfo.tooltipContent = function(item) {
-        return  thisGraph.tooltipContent(item) + " signups"
+        return thisGraph.tooltipContent(item, signups().desc, signups().plural)
     }
 
     return thisGraph;

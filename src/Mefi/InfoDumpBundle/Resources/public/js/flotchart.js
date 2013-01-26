@@ -45,6 +45,14 @@ var flotChartDisplay = (function(protected) {
         return "This is a tooltip."
     };
 
+    protected.pluralText = function(val, desc, plural) {
+        var text = plural;
+        if (val==1 || val==1.0) {
+            text = desc;
+        }
+        return text;
+    }
+
     protected.hideTooltip = function() {
         protected.hovercount = 0;
         $('#'+protected.tooltipId).remove();
@@ -114,7 +122,8 @@ var flotChartDisplay = (function(protected) {
         show:protected.showGraph,
         hideTooltip: protected.hideTooltip,
         getOptions: protected.getOptions,
-        tooltipContent: protected.tooltipContent
+        tooltipContent: protected.tooltipContent,
+        pluralText: protected.pluralText
     }
 
 });
@@ -134,10 +143,13 @@ var countByDateChart = (function(protectedInfo) {
 
     };
 
-    protectedInfo.tooltipContent = function(item) {
+    protectedInfo.tooltipContent = function(item, desc, plural) {
         var x = item.datapoint[0],
             y = item.datapoint[1];
-        return new Date(x).toDateString() + ": " + y
+        var tooltip = new Date(x).toDateString() + ": " + y
+
+        var text = thisGraph.pluralText(y, desc, plural);
+        return tooltip +" "+text;
     }
 
     protectedInfo.getOptions = function() {
@@ -179,14 +191,17 @@ var countByYearChart  = (function(protectedInfo) {
 
     };
 
-    protectedInfo.tooltipContent = function(item) {
+    protectedInfo.tooltipContent = function(item, desc, plural) {
         var x = item.datapoint[0],
             y = item.datapoint[1];
 
         var year = 1900+new Date(x).getYear();
-        return year + ": " + y;
+        var tooltip = year + ": " + y;
+        var text = thisGraph.pluralText(y, desc, plural);
+        return tooltip +" "+text;
 
     }
+
 
     protectedInfo.getOptions = function() {
 
@@ -250,10 +265,14 @@ var countByMonthYearChart = (function(protectedInfo) {
         return plotData;
     };
 
-    protectedInfo.tooltipContent = function(item) {
+
+    protectedInfo.tooltipContent = function(item, desc, plural)  {
         var x = item.datapoint[0],
             y = item.datapoint[1] - item.datapoint[2]
-        return protectedInfo.monthName(x) + " " + item.series.label + ": " +y
+        var tooltip =  protectedInfo.monthName(x) + " " + item.series.label + ": " +y
+
+        var text = thisGraph.pluralText(y, desc, plural);
+        return tooltip +" "+text;
     }
 
     //TODO: Fix this as well, see countByDateChart
@@ -306,10 +325,13 @@ var countByDOWChart = (function(protectedInfo) {
         return plotData;
     };
 
-    protectedInfo.tooltipContent = function(item) {
+    protectedInfo.tooltipContent = function(item, desc, plural) {
         var x = item.datapoint[0],
             y = item.datapoint[1] - item.datapoint[2]
-        return item.series.label + ": " + y + " " + protectedInfo.dayOfWeekName(x);
+        var tooltip = item.series.label + ": " + y + " " + protectedInfo.dayOfWeekName(x);
+
+        var text = thisGraph.pluralText(y, desc, plural);
+        return tooltip +" "+text;
     }
 
     //TODO: Fix this as well, see countByDateChart
@@ -356,11 +378,14 @@ var countByHourChart  = (function(protectedInfo) {
 
     };
 
-    protectedInfo.tooltipContent = function(item) {
+    protectedInfo.tooltipContent = function(item, desc, plural) {
         var x = item.datapoint[0],
             y = item.datapoint[1];
 
-        return displayHour(x) + ": " + y;
+        var tooltip = displayHour(x) + ": " + y;
+
+        var text = thisGraph.pluralText(y, desc, plural);
+        return tooltip +" "+text;
 
     }
 
@@ -406,12 +431,15 @@ var countByMonthChart = (function(protectedInfo) {
 
     };
 
-    protectedInfo.tooltipContent = function(item) {
+    protectedInfo.tooltipContent = function(item, desc, plural)  {
         var x = item.datapoint[0],
             y = item.datapoint[1];
-        var s = new Date(x).toDateString() + ": " + y
+        var tooltip = new Date(x).toDateString() + ": " + y
         //this is such a hack! There should be an easier way for date string manipulation, but whatevs...
-        return s.replace(' 01', '').substr(4);
+        tooltip = tooltip.replace(' 01', '').substr(4);
+
+        var text = thisGraph.pluralText(y, desc, plural);
+        return tooltip +" "+text;
     }
 
     protectedInfo.getOptions = function() {
