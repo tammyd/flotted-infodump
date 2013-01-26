@@ -7,27 +7,31 @@ use Symfony\Component\HttpFoundation\Response;
 class AskMePostsController extends JsonDataController
 {
 
+    /**
+     * @return \Mefi\InfoDumpBundle\Data\AskMePostsData
+     */
+    private function getData()
+    {
+        return $this->get('infodump.askmeposts.data');
+    }
 
     public function postsByDateDataAction() {
 
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByDate('datestamp');
         return $this->jsonResponse($data);
     }
 
     public function postsByYearDataAction() {
 
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByYear('datestamp');
         return $this->jsonResponse($data);
 
     }
 
     public function postsByMonthYearDataAction() {
-        $rawData = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $rawData = $this->getData()
             ->getCountByMonthYear('datestamp');
 
         $data = array();
@@ -44,8 +48,7 @@ class AskMePostsController extends JsonDataController
     }
 
     public function postsByDOWDataAction() {
-        $rawData = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $rawData = $this->getData()
             ->getCountByYearDayOfWeek('datestamp');
 
         $data = array();
@@ -62,8 +65,7 @@ class AskMePostsController extends JsonDataController
 
 
     public function postsByHourDataAction() {
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByHour('datestamp');
         return $this->jsonResponse($data);
     }
@@ -71,16 +73,14 @@ class AskMePostsController extends JsonDataController
 
     public function postsByMonthDataAction() {
 
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByMonth('datestamp');
         return $this->jsonResponse($data);
     }
 
     public function deletedPostsByMonthDataAction() {
 
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByMonth('datestamp', 'deleted = 1');
         return $this->jsonResponse($data);
     }
@@ -88,8 +88,7 @@ class AskMePostsController extends JsonDataController
 
     public function deletedPostsByMonthYearDataAction()
     {
-        $rawData = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $rawData = $this->getData()
             ->getCountByMonthYear('datestamp', 'deleted = 1');
 
         $data = array();
@@ -106,15 +105,13 @@ class AskMePostsController extends JsonDataController
     }
 
     public function deletedPostsByHourDataAction() {
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByHour('datestamp', 'deleted = 1');
         return $this->jsonResponse($data);
     }
 
     public function deletedPostsByDOWDataAction() {
-        $rawData = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $rawData = $this->getData()
             ->getCountByYearDayOfWeek('datestamp', 'deleted = 1');
 
         $data = array();
@@ -137,8 +134,7 @@ class AskMePostsController extends JsonDataController
 
     public function deletedPostsByDateDataAction() {
 
-        $rawData = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $rawData = $this->getData()
             ->getCountByDate('datestamp', 'deleted = 1');
 
         $dates = array_map(function($x) { return new \DateTime($x['date']); }, $rawData);
@@ -160,8 +156,7 @@ class AskMePostsController extends JsonDataController
 
     public function deletedPostsByYearDataAction() {
 
-        $data = $this->get('infodump.singletable.data')
-            ->setClassName('MefiInfoDumpBundle:PostdataAskme')
+        $data = $this->getData()
             ->getCountByYear('datestamp', 'deleted = 1');
         return $this->jsonResponse($data);
 

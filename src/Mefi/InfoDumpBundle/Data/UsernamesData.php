@@ -4,7 +4,7 @@ namespace Mefi\InfoDumpBundle\Data;
 
 use Doctrine\ORM\EntityManager;
 
-class UsernamesData extends SingleTableInfodumpData
+class UsernamesData extends SingleTableData
 {
 
     const DOCTRINE_CLASS = 'MefiInfoDumpBundle:Usernames';
@@ -12,6 +12,9 @@ class UsernamesData extends SingleTableInfodumpData
 
     public function __construct(EntityManager $em, $useCache=true, $cacheTime=3600)
     {
-        parent::__construct($em, self::DOCTRINE_CLASS, $useCache, $cacheTime);
+        $this->setEntityManager($em);
+        $this->setClassName(self::DOCTRINE_CLASS);
+        $this->setUseCache($useCache);
+        $this->setCacheTime($cacheTime);
     }
 }

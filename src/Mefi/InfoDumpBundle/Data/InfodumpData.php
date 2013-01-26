@@ -11,11 +11,9 @@ abstract class InfodumpData
     protected $cacheTime;
     protected $useCache;
 
-    public function __construct(EntityManager $em, $useCache=true, $cacheTime=3600)
+
+    public function __construct()
     {
-        $this->entityManager = $em;
-        $this->setUseCache($useCache);
-        $this->setCacheTime($cacheTime);
     }
 
     public function setCacheTime($cacheTime)

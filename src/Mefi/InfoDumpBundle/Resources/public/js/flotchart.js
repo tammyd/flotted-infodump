@@ -144,7 +144,7 @@ var countByDateChart = (function(protectedInfo) {
 
         var opt = thisGraph.getOptions();
         var options = $.extend(true, {}, opt, {
-            lines: { show: true },
+            lines: { show: false },
             points: { show: true },
             xaxis: { mode: "time", minTickSize: [1, 'day'], tickDecimals: 0}
         });

@@ -4,6 +4,10 @@ parameters:
 
 services:
 
-  infodump.singletable.data:
+  infodump.usernames.data:
     class: Mefi\InfoDumpBundle\Data\UsernamesData
+    arguments: [ @doctrine.orm.entity_manager, true, 3600 ]
+
+  infodump.askmeposts.data:
+    class: Mefi\InfoDumpBundle\Data\AskMePostsData
     arguments: [ @doctrine.orm.entity_manager, true, 3600 ]
