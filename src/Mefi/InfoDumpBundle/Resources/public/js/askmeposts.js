@@ -10,7 +10,7 @@ var deletedAskposts = (function() {
 
     return {
         desc: 'deleted post',
-        plural: 'test posts'
+        plural: 'posts'
     }
 });
 

@@ -424,7 +424,8 @@ var countByMonthChart = (function(protectedInfo) {
         var data = [];
         for (i=0; i<jsonData.length;i++) {
             var obj = jsonData[i]
-            data.push([Date.parse(obj.date).getTime(), obj.count]);
+
+            data.push([Date.parse(obj.date).moveToFirstDayOfMonth().getTime(), obj.count]);
         }
 
         return [data];
@@ -434,9 +435,7 @@ var countByMonthChart = (function(protectedInfo) {
     protectedInfo.tooltipContent = function(item, desc, plural)  {
         var x = item.datapoint[0],
             y = item.datapoint[1];
-        var tooltip = new Date(x).toDateString() + ": " + y
-        //this is such a hack! There should be an easier way for date string manipulation, but whatevs...
-        tooltip = tooltip.replace(' 01', '').substr(4);
+        var tooltip = new Date(x).moveToFirstDayOfMonth().toString('MMM yyyy') + ": " + y
 
         var text = thisGraph.pluralText(y, desc, plural);
         return tooltip +" "+text;
@@ -444,11 +443,36 @@ var countByMonthChart = (function(protectedInfo) {
 
     protectedInfo.getOptions = function() {
 
+        var ticks = function(axis) {
+            var maxTicks = 20;
+            var result = [];
+            var tick=new Date(axis.min).moveToFirstDayOfMonth().set({hour: 0, min: 0 })
+            for (tick; tick.getTime() <= axis.max; tick=tick.addMonths(1)) {
+                result.push(tick.getTime());
+            }
+
+            //at best, we want to return 20? ticks
+            var eachNth = Math.ceil(result.length/maxTicks);
+            var filtered = [];
+            for (var i = 0; i < result.length; i = i+eachNth) {
+                filtered.push(result[i]);
+            };
+
+            return filtered;
+
+
+        };
+
+        var tickFormatter = function(val, axis) {
+            var d = new Date(val);
+            return d.toString("MMM 'yy");
+        }
+
         var opt = thisGraph.getOptions();
         var options = $.extend(true, {}, opt, {
             lines: { show: true },
             points: { show: true },
-            xaxis: { mode: "time", minTickSize: [1, 'month'], tickDecimals: 0}
+            xaxis: { mode: "time", minTickSize: [1, 'month'], ticks:ticks, tickFormatter: tickFormatter}
         });
 
         return options;
