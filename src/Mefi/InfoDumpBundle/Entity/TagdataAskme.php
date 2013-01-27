@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\TagdataAskme
+ * TagdataAskme
  *
  * @ORM\Table(name="tagdata_askme")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TagdataAskme
 {
     /**
-     * @var integer $tagid
+     * @var integer
      *
      * @ORM\Column(name="tagid", type="integer", nullable=false)
      * @ORM\Id
@@ -22,21 +22,21 @@ class TagdataAskme
     private $tagid;
 
     /**
-     * @var integer $linkid
+     * @var integer
      *
      * @ORM\Column(name="linkid", type="integer", nullable=true)
      */
     private $linkid;
 
     /**
-     * @var \DateTime $linkdate
+     * @var \DateTime
      *
      * @ORM\Column(name="linkdate", type="datetime", nullable=true)
      */
     private $linkdate;
 
     /**
-     * @var string $tagname
+     * @var string
      *
      * @ORM\Column(name="tagname", type="text", nullable=true)
      */

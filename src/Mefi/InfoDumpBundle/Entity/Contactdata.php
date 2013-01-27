@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\Contactdata
+ * Contactdata
  *
  * @ORM\Table(name="contactdata")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Contactdata
 {
     /**
-     * @var integer $contactId
+     * @var integer
      *
      * @ORM\Column(name="contact_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,21 +22,21 @@ class Contactdata
     private $contactId;
 
     /**
-     * @var integer $contacter
+     * @var integer
      *
      * @ORM\Column(name="contacter", type="integer", nullable=true)
      */
     private $contacter;
 
     /**
-     * @var integer $contactee
+     * @var integer
      *
      * @ORM\Column(name="contactee", type="integer", nullable=true)
      */
     private $contactee;
 
     /**
-     * @var \DateTime $date
+     * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime", nullable=true)
      */

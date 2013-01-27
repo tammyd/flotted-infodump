@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\Usernames
+ * Usernames
  *
  * @ORM\Table(name="usernames")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Usernames
 {
     /**
-     * @var integer $userid
+     * @var integer
      *
      * @ORM\Column(name="userid", type="integer", nullable=false)
      * @ORM\Id
@@ -22,14 +22,14 @@ class Usernames
     private $userid;
 
     /**
-     * @var \DateTime $joindate
+     * @var \DateTime
      *
      * @ORM\Column(name="joindate", type="datetime", nullable=true)
      */
     private $joindate;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="text", nullable=true)
      */

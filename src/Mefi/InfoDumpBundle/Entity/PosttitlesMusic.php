@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\PosttitlesMusic
+ * PosttitlesMusic
  *
  * @ORM\Table(name="posttitles_music")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class PosttitlesMusic
 {
     /**
-     * @var integer $postid
+     * @var integer
      *
      * @ORM\Column(name="postid", type="integer", nullable=false)
      * @ORM\Id
@@ -22,7 +22,7 @@ class PosttitlesMusic
     private $postid;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="text", nullable=true)
      */

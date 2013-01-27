@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\Favoritestypes
+ * Favoritestypes
  *
  * @ORM\Table(name="favoritestypes")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Favoritestypes
 {
     /**
-     * @var integer $siteid
+     * @var integer
      *
      * @ORM\Column(name="siteid", type="integer", nullable=false)
      * @ORM\Id
@@ -22,7 +22,7 @@ class Favoritestypes
     private $siteid;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="text", nullable=false)
      */

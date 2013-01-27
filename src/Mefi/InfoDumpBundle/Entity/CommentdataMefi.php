@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\CommentdataMefi
+ * CommentdataMefi
  *
  * @ORM\Table(name="commentdata_mefi")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CommentdataMefi
 {
     /**
-     * @var integer $commentid
+     * @var integer
      *
      * @ORM\Column(name="commentid", type="integer", nullable=false)
      * @ORM\Id
@@ -22,35 +22,35 @@ class CommentdataMefi
     private $commentid;
 
     /**
-     * @var integer $postid
+     * @var integer
      *
      * @ORM\Column(name="postid", type="integer", nullable=true)
      */
     private $postid;
 
     /**
-     * @var integer $userid
+     * @var integer
      *
      * @ORM\Column(name="userid", type="integer", nullable=true)
      */
     private $userid;
 
     /**
-     * @var \DateTime $datestamp
+     * @var \DateTime
      *
      * @ORM\Column(name="datestamp", type="datetime", nullable=true)
      */
     private $datestamp;
 
     /**
-     * @var integer $faves
+     * @var integer
      *
      * @ORM\Column(name="faves", type="integer", nullable=true)
      */
     private $faves;
 
     /**
-     * @var boolean $bestanswer
+     * @var boolean
      *
      * @ORM\Column(name="bestanswer", type="boolean", nullable=true)
      */

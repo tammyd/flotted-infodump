@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\CommentlengthAskme
+ * CommentlengthAskme
  *
  * @ORM\Table(name="commentlength_askme")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CommentlengthAskme
 {
     /**
-     * @var integer $commentid
+     * @var integer
      *
      * @ORM\Column(name="commentid", type="integer", nullable=false)
      * @ORM\Id
@@ -22,7 +22,7 @@ class CommentlengthAskme
     private $commentid;
 
     /**
-     * @var integer $length
+     * @var integer
      *
      * @ORM\Column(name="length", type="integer", nullable=true)
      */

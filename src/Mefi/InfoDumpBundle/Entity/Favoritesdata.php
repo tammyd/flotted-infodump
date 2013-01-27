@@ -5,7 +5,7 @@ namespace Mefi\InfoDumpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mefi\InfoDumpBundle\Entity\Favoritesdata
+ * Favoritesdata
  *
  * @ORM\Table(name="favoritesdata")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Favoritesdata
 {
     /**
-     * @var integer $favoritesdataId
+     * @var integer
      *
      * @ORM\Column(name="favoritesdata_id", type="integer", nullable=false)
      * @ORM\Id
@@ -22,49 +22,49 @@ class Favoritesdata
     private $favoritesdataId;
 
     /**
-     * @var integer $faveid
+     * @var integer
      *
      * @ORM\Column(name="faveid", type="integer", nullable=true)
      */
     private $faveid;
 
     /**
-     * @var integer $faver
+     * @var integer
      *
      * @ORM\Column(name="faver", type="integer", nullable=true)
      */
     private $faver;
 
     /**
-     * @var integer $favee
+     * @var integer
      *
      * @ORM\Column(name="favee", type="integer", nullable=true)
      */
     private $favee;
 
     /**
-     * @var integer $type
+     * @var integer
      *
      * @ORM\Column(name="type", type="integer", nullable=true)
      */
     private $type;
 
     /**
-     * @var integer $target
+     * @var integer
      *
      * @ORM\Column(name="target", type="integer", nullable=true)
      */
     private $target;
 
     /**
-     * @var integer $parent
+     * @var integer
      *
      * @ORM\Column(name="parent", type="integer", nullable=true)
      */
     private $parent;
 
     /**
-     * @var \DateTime $datestamp
+     * @var \DateTime
      *
      * @ORM\Column(name="datestamp", type="datetime", nullable=true)
      */
