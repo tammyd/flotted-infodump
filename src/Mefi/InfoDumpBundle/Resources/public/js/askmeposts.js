@@ -10,7 +10,7 @@ var deletedAskposts = (function() {
 
     return {
         desc: 'deleted post',
-        plural: 'posts'
+        plural: 'deleted posts'
     }
 });
 
@@ -98,6 +98,17 @@ var askDeletedPostsByDate = (function() {
     protectedInfo.tooltipContent = function(item) {
         return thisGraph.tooltipContent(item, deletedAskposts().desc, deletedAskposts().plural)
     }
+
+    protectedInfo.getOptions = function() {
+
+        var opt = thisGraph.getOptions();
+        var options = $.extend(true, {}, opt, {
+            bars: { show: true},
+            points: { show: true }
+        });
+
+        return options;
+    };
 
     return thisGraph;
 });
