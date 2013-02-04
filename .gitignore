@@ -19,3 +19,5 @@ app/config/parameters.yml
 
 src/Profiler
 web/apc.php
+
+src/Mefi/InfoDumpBundle/Resources/config/sql/data/*
