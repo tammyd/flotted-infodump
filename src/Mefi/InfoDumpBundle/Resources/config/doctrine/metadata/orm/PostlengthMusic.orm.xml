@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="PostlengthMusic" table="postlength_music">
+    <id name="postid" type="integer" column="postid">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="title" type="integer" column="title" nullable="false"/>
+    <field name="above" type="integer" column="above" nullable="false"/>
+    <field name="below" type="integer" column="below" nullable="false"/>
+    <field name="url" type="integer" column="url" nullable="false"/>
+    <field name="urldesc" type="integer" column="urldesc" nullable="false"/>
+  </entity>
+</doctrine-mapping>
