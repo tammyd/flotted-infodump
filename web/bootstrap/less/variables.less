@@ -5,13 +5,6 @@
 
 // Global values
 // --------------------------------------------------
-@mfDarkBlue: #000033;
-@mfMedBlue: #003366;
-@mfBlue:  #006699;
-@mfLightGreen: #006699;
-@mfGreen: #336600;
-@mfDarkGrey: #333;
-@mfGrey: #666;
 
 
 // Grays
@@ -39,14 +32,14 @@
 
 // Scaffolding
 // -------------------------
-@bodyBackground:	@white;
-@textColor:	@grayDarker;
+@bodyBackground:        @white;
+@textColor:             @grayDark;
 
 
 // Links
 // -------------------------
-@linkColor:	@mfBlue;
-@linkColorHover:	darken(@linkColor, 15%);
+@linkColor:             #08c;
+@linkColorHover:        darken(@linkColor, 15%);
 
 
 // Typography
@@ -55,10 +48,10 @@
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
-@baseFontSize:	        14px;
-@baseFontFamily:	    Play;	@import url(http://fonts.googleapis.com/css?family=Play);
-@baseLineHeight:	    20px;
-@altFontFamily:	        @serifFontFamily;
+@baseFontSize:          14px;
+@baseFontFamily:        @sansFontFamily;
+@baseLineHeight:        20px;
+@altFontFamily:         @serifFontFamily;
 
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    bold;    // instead of browser default, bold
@@ -93,7 +86,7 @@
 // -------------------------
 @btnBackground:                     @white;
 @btnBackgroundHighlight:            darken(@white, 10%);
-@btnBorder:                         #bbb;
+@btnBorder:                         #ccc;
 
 @btnPrimaryBackground:              @linkColor;
 @btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 20%);
