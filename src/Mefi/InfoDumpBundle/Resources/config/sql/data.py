@@ -9,6 +9,8 @@ import math
 import time
 import warnings
 import os
+import re
+from dateutil.parser import *
 
 
 class infodumpLoader:
@@ -108,6 +110,7 @@ class infodumpLoader:
 
     def getFilename(self, table):
         return os.path.join(self.filedir, table + ".txt")
+
 
     def loadTable(self, table):
         filename = self.getFilename(table)
@@ -221,8 +224,9 @@ if __name__ == '__main__':
         password = sys.argv[3]
         dbname = sys.argv[4]
         dir = sys.argv[5]
+        filter = sys.argv[6]
     except Exception:
-        print "Usage: %s <host> <user> <password> <dbname> <datadir>" % sys.argv[0]
+        print "Usage: %s <host> <user> <password> <dbname> <datadir> <filter>" % sys.argv[0]
         exit()
 
     def defaultSanity(lineValues, length):
@@ -230,6 +234,19 @@ if __name__ == '__main__':
     #Otherwise, return the "fixed" value
         if len(lineValues) != length:
             return None
+
+        lineValues = dateSanity(lineValues)
+        return lineValues
+
+    def dateSanity(lineValues):
+        for i, value in enumerate(lineValues):
+
+            val2 = re.sub(r':[0-9]{3}([A|P]M)', r'\1', value)
+            if val2 != value:
+                parsed = parse(val2)
+                dt = parsed.strftime('%Y-%m-%d %H:%M:%S')
+                lineValues[i] = dt
+
         return lineValues
 
     def postDataSanity(lineValues):
@@ -240,15 +257,19 @@ if __name__ == '__main__':
             if isinstance(x, basestring):
                 if not x:
                     return None
+
+        lineValues = dateSanity(lineValues)
         return lineValues
 
     def favoritesSanity(lineValues):
         if len(lineValues) != 7:
             return None
 
+        lineValues = dateSanity(lineValues)
         return ['NULL'] + lineValues
 
     def appendLastSanity(lineValues, length, missing):
+        lineValues = dateSanity(lineValues)
         if len(lineValues) == length:
             return lineValues
         if len(lineValues) == (length-1):
@@ -257,6 +278,7 @@ if __name__ == '__main__':
             return None
 
     def appendLastSanityWithIntTypeCheck(lineValues, length, missing):
+        lineValues = dateSanity(lineValues)
         if len(lineValues) == length:
             return lineValues
         if len(lineValues) == (length-1):
@@ -264,39 +286,42 @@ if __name__ == '__main__':
                 return lineValues + [missing]
 
         return None
+
     
     sites = {
         'postdata_music': {'sanity': lambda x:appendLastSanityWithIntTypeCheck(x, 8, '[NULL]')},
         'postdata_meta': {'sanity': lambda x:postDataSanity(x)},
         'postdata_askme': {'sanity': lambda x:appendLastSanityWithIntTypeCheck(x, 8, '[NULL]')},
         'postdata_mefi': {'sanity': lambda x:postDataSanity(x)},
-        'postlength_music': {},
-        'postlength_meta': {},
-        'postlength_askme': {},
-        'postlength_mefi': {},
-        'tagdata_music': {},
-        'tagdata_meta': {},
-        'tagdata_askme': {},
-        'tagdata_mefi': {},
-        'commentdata_music': {},
-        'commentdata_meta': {},
-        'commentdata_askme': {},
-        'commentdata_mefi': {},
-        'commentlength_music': {},
-        'commentlength_meta': {},
-        'commentlength_askme': {},
-        'commentlength_mefi': {},
-        'contactdata': {'auto':True},
-        'usernames': {},
-        'favoritesdata': {'auto':True},
+        'postlength_music': {'sanity': lambda x:dateSanity(x)},
+        'postlength_meta': {'sanity': lambda x:dateSanity(x)},
+        'postlength_askme': {'sanity': lambda x:dateSanity(x)},
+        'postlength_mefi': {'sanity': lambda x:dateSanity(x)},
+        'tagdata_music': {'sanity': lambda x:dateSanity(x)},
+        'tagdata_meta': {'sanity': lambda x:dateSanity(x)},
+        'tagdata_askme': {'sanity': lambda x:dateSanity(x)},
+        'tagdata_mefi': {'sanity': lambda x:dateSanity(x)},
+        'commentdata_music': {'sanity': lambda x:dateSanity(x)},
+        'commentdata_meta': {'sanity': lambda x:dateSanity(x)},
+        'commentdata_askme': {'sanity': lambda x:dateSanity(x)},
+        'commentdata_mefi': {'sanity': lambda x:dateSanity(x)},
+        'commentlength_music': {'sanity': lambda x:dateSanity(x)},
+        'commentlength_meta': {'sanity': lambda x:dateSanity(x)},
+        'commentlength_askme':{'sanity': lambda x:dateSanity(x)},
+        'commentlength_mefi': {'sanity': lambda x:dateSanity(x)},
+        'contactdata': {'auto':True, 'sanity': lambda x:dateSanity(x)},
+        'usernames': {'sanity': lambda x:dateSanity(x)},
+        'favoritesdata': {'auto':True, 'sanity': lambda x:dateSanity(x)},
         'posttitles_music': {'sanity': lambda x:defaultSanity(x, 2)},
         'posttitles_meta': {'sanity': lambda x:defaultSanity(x, 2)},
         'posttitles_askme': {'sanity': lambda x:defaultSanity(x, 2)},
         'posttitles_mefi': {'sanity': lambda x:defaultSanity(x, 2)},
     }
 
+    filtered_sites = dict((k, v) for k, v in sites.items() if filter in k)
+
     default = {'auto':False, 'max':400, 'skip':2, 'sanity':None, 'skip_check':False}
-    loader = infodumpLoader(dbname,user, password,host,dir,sites, defaults=default)
+    loader = infodumpLoader(dbname,user, password,host,dir,filtered_sites, defaults=default)
     loader.run()
 
 
