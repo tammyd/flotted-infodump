@@ -15,7 +15,7 @@
 
 {% block bodycontent %}
   {% block header %}
-    {%  render "MefiInfoDumpBundle:Common:header" with {} %}
+    {% render controller('MefiInfoDumpBundle:Common:header', {}) %}
   {% endblock %}
 
   {% block content %}
@@ -28,7 +28,7 @@
 
 {% block footercontent %}
 
-  {% render "MefiInfoDumpBundle:Common:footer" %}
+  {% render controller('MefiInfoDumpBundle:Common:footer', {}) %}
 
 {% endblock %}
 
